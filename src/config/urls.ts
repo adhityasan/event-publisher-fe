@@ -16,7 +16,7 @@ export const USER_PROFILE_PATH = '/users/profile/:userId';
 export const CREATE_EO_PATH = '/create-event-organizer';
 export const SIGNIN_AS_EO_PATH = '/signin-eo';
 export const EVENT_REGISTRATION_PATH = '/event/:eventId/registration';
-export const LOGOUT = '/logout';
+export const SIGNOUT = '/signout';
 
 // Event Organizer Paths
 export const EO_PATH = '/eo';

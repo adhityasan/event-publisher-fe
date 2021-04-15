@@ -1,23 +1,31 @@
 import React, { createContext, useState, useCallback, useContext, ReactNode } from 'react';
 
-interface IAppContext {
-  [key: string]: any;
-}
 interface IAppProviderProps {
   children: ReactNode;
   initialState?: AppContext.IState;
 }
 
-const AppContext = createContext({});
+const defaultAppContextState: AppContext.IState = {
+  auth: false,
+  accessToken: '',
+  user: null
+};
+
+const AppContext = createContext<AppContext.IValue>({
+  appState: defaultAppContextState,
+  setAppState: () => {},
+  updateAppState: () => {}
+});
+
 const { Provider } = AppContext;
 
 export const Consumer = AppContext.Consumer;
 
-export const AppProvider = ({ children, initialState = {} }: IAppProviderProps) => {
-  const [state, setActualState] = useState<AppContext.IState>(initialState);
+export const AppProvider = ({ children, initialState }: IAppProviderProps) => {
+  const [contextState, setContextState] = useState<AppContext.IState>(initialState || defaultAppContextState);
 
-  const setState = useCallback((newState, preUpdate) => {
-    setActualState((prevState) => {
+  const setAppState = useCallback((newState, preUpdate) => {
+    setContextState((prevState) => {
       if (preUpdate && preUpdate.call) {
         preUpdate();
       }
@@ -25,17 +33,17 @@ export const AppProvider = ({ children, initialState = {} }: IAppProviderProps) 
     });
   }, []);
 
-  const updateState = useCallback((updateFunction) => setActualState(updateFunction), []);
+  const updateAppState = useCallback((freshAppState: AppContext.IState) => setContextState(freshAppState), []);
 
-  const appContextValue = {
-    globalState: { ...initialState, ...state },
-    setState,
-    updateState
+  const appContextValue: AppContext.IValue = {
+    appState: contextState,
+    setAppState,
+    updateAppState
   };
 
   return <Provider value={appContextValue}>{children}</Provider>;
 };
 
-export const useAppContext = (): IAppContext => useContext(AppContext);
+export const useAppContext = (): AppContext.IValue => useContext<AppContext.IValue>(AppContext);
 
 export default AppContext;
