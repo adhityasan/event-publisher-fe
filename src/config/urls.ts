@@ -5,7 +5,7 @@ export const SIGNUP_PATH = '/signup';
 export const ABOUT_PATH = '/about';
 export const SEARCH_EVENT_PATH = '/events';
 export const DETAIL_EVENT_PATH = '/event/:eventId';
-export const MAIL_VERIFICATION_PATH = '/mail-verification';
+export const EMAIL_VERIFICATION_PATH = '/email-verification';
 
 // Registered Users Paths
 export const CATEGORY_OF_INTEREST_SELECTION_PATH = '/category-of-interest';

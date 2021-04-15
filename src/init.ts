@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-import { API_URL } from './config/app';
+import { API_URL, APP_USE_SOCKET_IO } from './config/app';
 import localStorage from './utils/localStorage/index';
 
 import { onConnect } from './utils/sockets';
@@ -47,13 +47,13 @@ declare global {
 }
 
 const connectSocketIOClient = (): void => {
-  if (API_URL) {
+  if (API_URL && APP_USE_SOCKET_IO) {
     const socket = io(API_URL);
     window.socket = socket;
 
     onConnect(() => {
       // eslint-disable-next-line no-console
-      console.log('socket connected');
+      console.log('socket.IO connected');
     });
   }
 };

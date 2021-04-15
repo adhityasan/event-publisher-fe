@@ -8,8 +8,9 @@ import About from './About';
 import Signin from './SignIn';
 import Signup from './SignUp';
 import SearchEvent from './SearchEvent';
+import EmailVerification from './EmailVerification';
 
-const appRoutes = [Home, About, Signin, Signup, SearchEvent, NotFound];
+const appRoutes = [Home, About, Signin, Signup, EmailVerification, SearchEvent, NotFound];
 
 const initRenderRoutes = () => (
   <AppProvider>
