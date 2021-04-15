@@ -1,3 +1,3 @@
-import RegisteredLayoutView from './RegisteredLayoutView';
+import PublicLayoutView from './RegisteredLayoutView';
 
-export default RegisteredLayoutView;
+export default PublicLayoutView;

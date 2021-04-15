@@ -1,13 +1,24 @@
 declare namespace AppContext {
   interface IUser {
-    auth: boolean;
-    token: string;
-    name: string;
+    _id: string;
+    createdAt: string;
     email: string;
-    userId: string;
+    name: string;
+    updatedAt: string;
+    verified: false;
   }
 
   interface IState {
-    user?: IUser;
+    auth: boolean;
+    accessToken: string;
+    user?: IUser | null;
+  }
+
+  type Dispatch = React.Dispatch<React.SetStateAction<IState>>;
+
+  interface IValue {
+    appState: IState;
+    setAppState: (newState: Partial<IState>, preUpdate?: any) => void;
+    updateAppState: (updateFunction: IState) => void;
   }
 }

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox } from 'antd';
+import axios from 'axios';
 import { SIGNUP_PATH } from '../../config/urls';
+import { SIGNIN_API } from '../../config/apiUrls';
+import { useAppContext } from '../../context/AppContext';
+import localStorage from '../../utils/localStorage';
 
 const layout = {
   labelCol: { span: 6 },
@@ -12,12 +16,27 @@ const tailLayout = {
 };
 
 const SigninForm = () => {
-  const onFinish = () => {};
+  const { updateAppState } = useAppContext();
+
+  const onFinish = (values: any) => {
+    axios
+      .post(SIGNIN_API, {
+        email: values?.email,
+        password: values?.password,
+        strategy: 'local'
+      })
+      .then(({ data }) => {
+        updateAppState({ accessToken: data?.accessToken, auth: true, user: data?.user });
+        localStorage.accessToken.init();
+        localStorage.accessToken.set(data?.accessToken);
+      });
+  };
+
   const onFinishFailed = () => {};
 
   return (
     <Form {...layout} name="basic" initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-      <Form.Item label="Username" name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
+      <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
         <Input />
       </Form.Item>
 

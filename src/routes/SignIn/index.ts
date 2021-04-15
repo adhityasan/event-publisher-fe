@@ -7,7 +7,8 @@ const SignInRoute: IRouteProps = {
   exact: true,
   strict: true,
   auth: false,
-  layout: 'public-user'
+  layout: 'public-user',
+  restricted: true
 };
 
 export default SignInRoute;

@@ -4,7 +4,7 @@ import LocalStorageEntry from './entry';
 
 const STORAGE_KEYS = {
   initiated: `${APP_NAME}.initiated`,
-  token: `${APP_NAME}.token`,
+  accessToken: `${APP_NAME}.accessToken`,
   notification: `${APP_NAME}.notification`,
   geolocation: `${APP_NAME}.geolocation`,
   location: `${APP_NAME}.location`
@@ -25,8 +25,8 @@ class LocalStorage {
     key: STORAGE_KEYS.initiated,
     defaultValue: INITIAL_LOCAL_STORAGE
   });
-  // TOKEN
-  token = new LocalStorageEntry({ key: STORAGE_KEYS.token, defaultValue: '' });
+  // ACCESS TOKEN
+  accessToken = new LocalStorageEntry({ key: STORAGE_KEYS.accessToken, defaultValue: '' });
   // NOTIFICATION
   notification = new LocalStorageEntry({ key: STORAGE_KEYS.notification, defaultValue: null });
   // GEOLOCATION

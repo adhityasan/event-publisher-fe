@@ -5,4 +5,5 @@ declare interface IRouteProps {
   strict: boolean;
   auth: boolean;
   layout: Layout.names;
+  restricted?: boolean;
 }
