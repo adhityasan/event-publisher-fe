@@ -26,6 +26,8 @@ export const PublicLayoutStyle = css`
     padding: 0 20px;
     margin-top: 64px;
     background: #fff;
+    position: relative;
+
     @media (min-width: ${tablets}px) {
       padding: 0 50px;
     }
