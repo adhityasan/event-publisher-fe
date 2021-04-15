@@ -3,3 +3,4 @@ dist
 src/serviceWorker.ts
 build
 public
+craco.config.js

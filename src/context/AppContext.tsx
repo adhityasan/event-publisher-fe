@@ -3,10 +3,9 @@ import React, { createContext, useState, useCallback, useContext, ReactNode } fr
 interface IAppContext {
   [key: string]: any;
 }
-
 interface IAppProviderProps {
   children: ReactNode;
-  initialState?: object;
+  initialState?: AppContext.IState;
 }
 
 const AppContext = createContext({});
@@ -15,7 +14,7 @@ const { Provider } = AppContext;
 export const Consumer = AppContext.Consumer;
 
 export const AppProvider = ({ children, initialState = {} }: IAppProviderProps) => {
-  const [state, setActualState] = useState(initialState);
+  const [state, setActualState] = useState<AppContext.IState>(initialState);
 
   const setState = useCallback((newState, preUpdate) => {
     setActualState((prevState) => {

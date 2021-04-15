@@ -5,11 +5,11 @@ import { AppProvider } from '../context/AppContext';
 import Home from './Home';
 import NotFound from './NotFound';
 import About from './About';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import Signin from './SignIn';
+import Signup from './SignUp';
 import SearchEvent from './SearchEvent';
 
-const appRoutes = [Home, About, SignIn, SignUp, SearchEvent, NotFound];
+const appRoutes = [Home, About, Signin, Signup, SearchEvent, NotFound];
 
 const initRenderRoutes = () => (
   <AppProvider>
