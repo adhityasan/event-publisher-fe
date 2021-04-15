@@ -3,7 +3,6 @@ import { desktops, lgdesktops, tablets } from '../../assets/theme/breakpoints';
 
 export const PublicLayoutStyle = css`
   .header {
-    padding: 0 20px;
     background: #fff;
     position: fixed;
     z-index: 2;
