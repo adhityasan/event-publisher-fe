@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Switch } from 'react-router-dom';
-import axios from 'axios';
+import LoadingApp from '../components/Loadings/LoadingApp';
 import { EventOrganizerRoute, PublicUserRoute, RegisteredUserRoute } from '../components/Route';
+import localStorage from '../utils/localStorage';
+import { SIGNIN_API } from '../config/apiUrls';
 import { AppProvider } from '../context/AppContext';
+import axiosInstance from '../axios.instances';
 import Home from './Home';
 import NotFound from './NotFound';
 import About from './About';
@@ -10,11 +13,10 @@ import Signin from './SignIn';
 import Signup from './SignUp';
 import SearchEvent from './SearchEvent';
 import EmailVerification from './EmailVerification';
-import LoadingApp from '../components/Loadings/LoadingApp';
-import localStorage from '../utils/localStorage';
-import { SIGNIN_API } from '../config/apiUrls';
+import Interest from './Interest';
+import SignOut from './SignOut';
 
-const appRoutes = [Home, About, Signin, Signup, EmailVerification, SearchEvent, NotFound];
+const appRoutes = [Home, About, Signin, Signup, EmailVerification, SearchEvent, Interest, SignOut, NotFound];
 
 const InitRenderRoutes = () => {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -23,7 +25,7 @@ const InitRenderRoutes = () => {
   useEffect(() => {
     const accessToken = localStorage.accessToken.get();
     if (accessToken) {
-      axios
+      axiosInstance
         .post(SIGNIN_API, { strategy: 'jwt', accessToken })
         .then(({ data }) =>
           setAppInitialContextValue({
@@ -41,7 +43,7 @@ const InitRenderRoutes = () => {
   }, []);
 
   return isAuthenticating ? (
-    <LoadingApp />
+    <LoadingApp width="100vw" height="100vh" />
   ) : (
     <AppProvider key="eventpublish-context-provider" initialState={appInitialContextValue}>
       <Switch>

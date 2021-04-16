@@ -1,17 +1,40 @@
+interface IEventCategories {
+  _id: string;
+  category: string;
+}
+
+interface IEventFormat {
+  _id: string;
+  format: string;
+}
+
+interface Interest {
+  _id: string;
+  category: string;
+}
+
+interface IUser {
+  _id: string;
+  createdAt: string;
+  email: string;
+  name: string;
+  updatedAt: string;
+  verified: boolean;
+  interest: Interest[];
+}
+
 declare namespace AppContext {
-  interface IUser {
-    _id: string;
-    createdAt: string;
-    email: string;
-    name: string;
-    updatedAt: string;
-    verified: false;
+  interface IMaster {
+    eventCategories: IEventCategories[];
+    eventFormat: IEventFormat[];
   }
 
   interface IState {
     auth: boolean;
     accessToken: string;
     user?: IUser | null;
+    _master_eventCategories?: any[];
+    _master_eventFormats?: any[];
   }
 
   type Dispatch = React.Dispatch<React.SetStateAction<IState>>;

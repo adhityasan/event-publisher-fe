@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { tablets } from '../../../assets/theme/breakpoints';
+import { phone, tablets } from '../../../assets/theme/breakpoints';
 import { primary } from '../../../assets/theme/colors';
 
 export const PublicLayoutDesktopNavStyle = css`
@@ -19,7 +19,7 @@ export const PublicLayoutDesktopNavStyle = css`
     flex-flow: row wrap;
     justify-content: flex-end;
     width: 100%;
-    @media (min-width: ${tablets}px) {
+    @media (min-width: ${tablets}) {
       display: flex;
     }
   }
@@ -31,7 +31,7 @@ export const PublicLayoutDesktopNavStyle = css`
     }
   }
   .burger-button {
-    @media (min-width: ${tablets}px) {
+    @media (min-width: ${tablets}) {
       display: none;
     }
     :hover {
@@ -46,22 +46,29 @@ export const PublicLayoutMobileNavStyle = css`
     color: rgba(0, 0, 0, 0.85);
   }
   .menu {
-    width: 100%;
+    width: 80%;
+    margin: 0 10% 0 10%;
     display: flex;
     flex-flow: column wrap;
     position: absolute;
     top: -1000px;
+    left: 0;
     transition: all 0.5s;
-    @media (min-width: ${tablets}px) {
-      display: none;
-    }
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 20px;
-    box-shadow: 0px 2px 4px rgba(217, 217, 217, 0.5);
+    box-shadow: 0px 4px 10px rgba(217, 217, 217, 0.8);
+    @media (min-width: ${phone}) {
+      width: 60%;
+      margin: 0 20% 0 20%;
+    }
+    @media (min-width: ${tablets}) {
+      display: none;
+    }
   }
   .show {
     top: 30px;
+    left: 0;
   }
   .menu-item {
     text-align: center;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Form, Input, Button, Modal } from 'antd';
-import axios from 'axios';
 import { SIGNIN_PATH } from '../../config/urls';
 import { SIGNUP_API } from '../../config/apiUrls';
 import SignupSuccess from './components/SignupSuccess';
+import axiosInstance from '../../axios.instances';
 
 const layout = {
   labelCol: { span: 8 },
@@ -36,7 +36,7 @@ const SignupForm = () => {
   };
 
   const onFinish = (value: any) => {
-    axios
+    axiosInstance
       .post(SIGNUP_API, {
         email: value.email,
         password: value.password,

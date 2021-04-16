@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Input, Button, Checkbox } from 'antd';
-import axios from 'axios';
-import { SIGNUP_PATH } from '../../config/urls';
+import { Link, useHistory } from 'react-router-dom';
+import { Form, Input, Button, Checkbox, notification } from 'antd';
+import { INTEREST_PATH, SIGNUP_PATH } from '../../config/urls';
 import { SIGNIN_API } from '../../config/apiUrls';
 import { useAppContext } from '../../context/AppContext';
 import localStorage from '../../utils/localStorage';
+import axiosInstance from '../../axios.instances';
 
 const layout = {
   labelCol: { span: 6 },
@@ -17,9 +17,10 @@ const tailLayout = {
 
 const SigninForm = () => {
   const { updateAppState } = useAppContext();
+  const history = useHistory();
 
   const onFinish = (values: any) => {
-    axios
+    axiosInstance
       .post(SIGNIN_API, {
         email: values?.email,
         password: values?.password,
@@ -27,8 +28,18 @@ const SigninForm = () => {
       })
       .then(({ data }) => {
         updateAppState({ accessToken: data?.accessToken, auth: true, user: data?.user });
-        localStorage.accessToken.init();
+        localStorage.accessToken.isExist();
         localStorage.accessToken.set(data?.accessToken);
+        // REDIRECT TO INTEREST PAGE IF USER DOESN'T HAVE INTEREST CATEGORIES
+        if (data?.user?.interest && data?.user?.interest?.length === 0) {
+          history.push(INTEREST_PATH);
+        }
+      })
+      .catch((err: Error) => {
+        notification.error({
+          message: err.message,
+          placement: 'bottomRight'
+        });
       });
   };
 
