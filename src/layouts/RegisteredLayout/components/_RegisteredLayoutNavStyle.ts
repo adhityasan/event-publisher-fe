@@ -20,7 +20,7 @@ export const PublicLayoutDesktopNavStyle = css`
     flex-flow: row wrap;
     justify-content: flex-end;
     width: 100%;
-    @media (min-width: ${tablets}px) {
+    @media (min-width: ${tablets}) {
       display: flex;
     }
   }
@@ -32,7 +32,7 @@ export const PublicLayoutDesktopNavStyle = css`
     }
   }
   .burger-button {
-    @media (min-width: ${tablets}px) {
+    @media (min-width: ${tablets}) {
       display: none;
     }
     :hover {
@@ -54,7 +54,7 @@ export const PublicLayoutMobileNavStyle = css`
     position: absolute;
     top: -1000px;
     transition: all 0.5s;
-    @media (min-width: ${tablets}px) {
+    @media (min-width: ${tablets}) {
       display: none;
     }
     background: #fff;

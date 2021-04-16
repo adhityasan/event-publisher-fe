@@ -4,7 +4,7 @@ import { desktops, tablets } from '../../assets/theme/breakpoints';
 export const SignUpStyle = css`
   width: 100%;
   position: relative;
-  @media (min-width: ${tablets}px) {
+  @media (min-width: ${tablets}) {
     padding-top: 100px;
   }
 
@@ -13,11 +13,11 @@ export const SignUpStyle = css`
     left: 0;
     height: 200px;
     width: 300px;
-    @media (min-width: ${tablets}px) {
+    @media (min-width: ${tablets}) {
       height: 400px;
       width: 600px;
     }
-    @media (min-width: ${desktops}px) {
+    @media (min-width: ${desktops}) {
       height: 600px;
       width: 900px;
     }
@@ -26,7 +26,7 @@ export const SignUpStyle = css`
   .form-column {
     display: flex;
     justify-content: center;
-    @media (min-width: ${tablets}px) {
+    @media (min-width: ${tablets}) {
       display: block;
     }
   }
@@ -36,11 +36,11 @@ export const SignUpStyle = css`
     max-width: 80%;
     background: rgb(255, 255, 255, 0.8);
     border-radius: 20px;
-    @media (min-width: ${tablets}px) {
+    @media (min-width: ${tablets}) {
       margin-top: 50px;
       max-width: 100%;
     }
-    @media (min-width: ${desktops}px) {
+    @media (min-width: ${desktops}) {
       margin-top: 100px;
       max-width: 100%;
     }
