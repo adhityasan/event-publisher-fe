@@ -4,8 +4,8 @@ import { primary } from '../../assets/theme/colors';
 
 export const LoadingAppStyle = css`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   align-items: flex-start;
   justify-content: center;
   padding-top: 250px;
