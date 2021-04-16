@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import { desktops, lgdesktops, tablets } from '../../assets/theme/breakpoints';
 
-export const PublicLayoutStyle = css`
+export const RegisteredLayoutStyle = css`
   .header {
     padding: 0 20px;
     background: #fff;

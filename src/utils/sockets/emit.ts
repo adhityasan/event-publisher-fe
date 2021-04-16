@@ -1,11 +1,11 @@
-export const emitAuthentication = (token: string): void => {
-  if (token) {
+export const emitAuthentication = (accessToken: string): void => {
+  if (accessToken) {
     window.socket.emit(
       'create',
       'authentication',
       {
         strategy: 'jwt',
-        accessToken: token
+        accessToken: accessToken
       },
       (error: any) => {
         if (error) throw error;

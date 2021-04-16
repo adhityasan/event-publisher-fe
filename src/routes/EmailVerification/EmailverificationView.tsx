@@ -4,7 +4,7 @@ import React, { useCallback, useEffect } from 'react';
 import { Modal } from 'antd';
 import { useHistory } from 'react-router';
 import { ReactComponent as UndrawIdeation } from '../../assets/svg/undraw_ideation.svg';
-import { EMAIL_VERIFICATION } from '../../config/apiUrls';
+import { EMAIL_VERIFICATION_API } from '../../config/apiUrls';
 import { useQuery } from '../../utils/hooks/useQuery';
 import { EmailVerificationStyle } from './_EmailVerificationStyle';
 import { SIGNIN_PATH } from '../../config/urls';
@@ -41,7 +41,7 @@ const EmailverificationView = () => {
   );
 
   useEffect(() => {
-    const verifyUrl = EMAIL_VERIFICATION;
+    const verifyUrl = EMAIL_VERIFICATION_API;
     const verifyToken = query.get('verifyToken');
     axios
       .get(verifyUrl, { params: { verifyToken } })

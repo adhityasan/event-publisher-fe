@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { phone, tablets } from '../../../assets/theme/breakpoints';
 import { primary } from '../../../assets/theme/colors';
 
-export const PublicLayoutDesktopNavStyle = css`
+export const RegisteredLayoutDesktopNavStyle = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -41,7 +41,7 @@ export const PublicLayoutDesktopNavStyle = css`
   }
 `;
 
-export const PublicLayoutMobileNavStyle = css`
+export const RegisteredLayoutMobileNavStyle = css`
   .navlink {
     color: rgba(0, 0, 0, 0.85);
   }
@@ -81,4 +81,4 @@ export const PublicLayoutMobileNavStyle = css`
   }
 `;
 
-export default { PublicLayoutDesktopNavStyle, PublicLayoutMobileNavStyle };
+export default { RegisteredLayoutDesktopNavStyle, RegisteredLayoutMobileNavStyle };

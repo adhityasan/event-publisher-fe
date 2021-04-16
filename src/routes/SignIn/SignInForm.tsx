@@ -1,7 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Input, Button, Checkbox } from 'antd';
-import { SIGNUP_PATH } from '../../config/urls';
+import { Link, useHistory } from 'react-router-dom';
+import { Form, Input, Button, Checkbox, notification } from 'antd';
+import { INTEREST_PATH, SIGNUP_PATH } from '../../config/urls';
+import { SIGNIN_API } from '../../config/apiUrls';
+import { useAppContext } from '../../context/AppContext';
+import localStorage from '../../utils/localStorage';
+import axiosInstance from '../../axios.instances';
 
 const layout = {
   labelCol: { span: 6 },
@@ -12,12 +16,38 @@ const tailLayout = {
 };
 
 const SigninForm = () => {
-  const onFinish = () => {};
+  const { updateAppState } = useAppContext();
+  const history = useHistory();
+
+  const onFinish = (values: any) => {
+    axiosInstance
+      .post(SIGNIN_API, {
+        email: values?.email,
+        password: values?.password,
+        strategy: 'local'
+      })
+      .then(({ data }) => {
+        updateAppState({ accessToken: data?.accessToken, auth: true, user: data?.user });
+        localStorage.accessToken.isExist();
+        localStorage.accessToken.set(data?.accessToken);
+        // REDIRECT TO INTEREST PAGE IF USER DOESN'T HAVE INTEREST CATEGORIES
+        if (data?.user?.interest && data?.user?.interest?.length === 0) {
+          history.push(INTEREST_PATH);
+        }
+      })
+      .catch((err: Error) => {
+        notification.error({
+          message: err.message,
+          placement: 'bottomRight'
+        });
+      });
+  };
+
   const onFinishFailed = () => {};
 
   return (
     <Form {...layout} name="basic" initialValues={{ remember: true }} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-      <Form.Item label="Username" name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
+      <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
         <Input />
       </Form.Item>
 

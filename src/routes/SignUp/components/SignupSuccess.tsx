@@ -6,7 +6,9 @@ const SignupSuccess = () => {
     <div className={SignupSuccessStyle}>
       <div className="description">
         <span>Great! We&#39;ve already sign you up,</span>
-        <span>Now you can signin into the app</span>
+        <span>
+          <b>We have sent some link to your email,</b> Please open the link to verify your account
+        </span>
       </div>
     </div>
   );
