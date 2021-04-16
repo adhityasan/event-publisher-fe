@@ -1,8 +1,9 @@
 import { css } from '@emotion/css';
 import { desktops, lgdesktops, tablets } from '../../assets/theme/breakpoints';
 
-export const PublicLayoutStyle = css`
+export const RegisteredLayoutStyle = css`
   .header {
+    padding: 0 20px;
     background: #fff;
     position: fixed;
     z-index: 2;
@@ -19,7 +20,7 @@ export const PublicLayoutStyle = css`
     }
   }
   .scrolled {
-    background: #eee;
+    box-shadow: 0 4px 10px #eee;
   }
   .content {
     padding: 0 20px;

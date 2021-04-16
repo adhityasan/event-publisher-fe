@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Col, Row } from 'antd';
 import { Link } from 'react-router-dom';
-import { PublicLayoutStyle } from './_RegisteredLayoutStyle';
-import { PublicLayoutDesktopNav, PublicLayoutMobileNav } from './components/RegisteredLayoutNav';
+import { RegisteredLayoutStyle } from './_RegisteredLayoutStyle';
+import { RegisteredLayoutDesktopNav, RegisteredLayoutMobileNav } from './components/RegisteredLayoutNav';
 
 const { Content, Header } = Layout;
 
@@ -29,7 +29,7 @@ const RegisteredLayoutView = ({ children }: any) => {
   }, []);
 
   return (
-    <div className={PublicLayoutStyle}>
+    <div className={RegisteredLayoutStyle}>
       <Layout>
         <Header id="public-header" className="header">
           <Row gutter={[12, 12]}>
@@ -39,10 +39,10 @@ const RegisteredLayoutView = ({ children }: any) => {
               </Link>
             </Col>
             <Col span={16}>
-              <PublicLayoutDesktopNav toggleMobileNav={toggleMobileNav} />
+              <RegisteredLayoutDesktopNav toggleMobileNav={toggleMobileNav} />
             </Col>
             <Col span={24}>
-              <PublicLayoutMobileNav isShow={isShowMobileNav} />
+              <RegisteredLayoutMobileNav isShow={isShowMobileNav} />
             </Col>
           </Row>
         </Header>
