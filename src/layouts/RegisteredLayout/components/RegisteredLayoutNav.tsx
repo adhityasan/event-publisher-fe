@@ -3,11 +3,9 @@ import { Button } from 'antd';
 import { BulbOutlined, LoginOutlined, MenuOutlined, SearchOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import RegisteredLayoutNav from './_RegisteredLayoutNavStyle';
-import { ABOUT_PATH, SEARCH_EVENT_PATH } from '../../../config/urls';
-import { useAppContext } from '../../../context/AppContext';
+import { ABOUT_PATH, SEARCH_EVENT_PATH, SIGNOUT_PATH } from '../../../config/urls';
 
 const Menus = ({ menuClassName }: { menuClassName?: string }) => {
-  const { setAppState } = useAppContext();
   return (
     <div className={menuClassName}>
       <NavLink to={ABOUT_PATH} className="navlink">
@@ -22,12 +20,12 @@ const Menus = ({ menuClassName }: { menuClassName?: string }) => {
           SEARCH EVENT
         </div>
       </NavLink>
-      <div onClick={() => setAppState({ auth: false })} className="navlink">
+      <NavLink to={SIGNOUT_PATH} className="navlink">
         <div className="menu-item">
           <LoginOutlined className="icon" />
           SIGN OUT
         </div>
-      </div>
+      </NavLink>
     </div>
   );
 };
