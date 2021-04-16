@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox } from 'antd';
-import axios from 'axios';
 import { SIGNUP_PATH } from '../../config/urls';
 import { SIGNIN_API } from '../../config/apiUrls';
 import { useAppContext } from '../../context/AppContext';
 import localStorage from '../../utils/localStorage';
+import axiosInstance from '../../axios.instances';
 
 const layout = {
   labelCol: { span: 6 },
@@ -19,7 +19,7 @@ const SigninForm = () => {
   const { updateAppState } = useAppContext();
 
   const onFinish = (values: any) => {
-    axios
+    axiosInstance
       .post(SIGNIN_API, {
         email: values?.email,
         password: values?.password,
