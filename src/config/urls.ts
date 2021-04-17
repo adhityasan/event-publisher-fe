@@ -13,8 +13,8 @@ export const RECOMMENDATION_EVENTS_PATH = '/events/recommendation';
 export const PROFILE_PATH = '/profile';
 export const UPDATE_PROFILE_PATH = '/profile/update';
 export const USER_PROFILE_PATH = '/users/profile/:userId';
-export const CREATE_EO_PATH = '/create-event-organizer';
-export const SIGNIN_AS_EO_PATH = '/signin-eo';
+export const LIST_EVENT_ORGANIZER_PATH = '/event-organizer/list';
+export const CREATE_EVENT_ORGANIZER_PATH = '/event-organizer/create';
 export const EVENT_REGISTRATION_PATH = '/event/:eventId/registration';
 export const SIGNOUT_PATH = '/signout';
 

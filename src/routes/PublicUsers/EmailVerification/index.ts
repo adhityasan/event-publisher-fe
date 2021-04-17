@@ -1,4 +1,4 @@
-import { EMAIL_VERIFICATION_PATH } from '../../config/urls';
+import { EMAIL_VERIFICATION_PATH } from '../../../config/urls';
 import EmailVerificationView from './EmailverificationView';
 
 const EmailVerificationRoute: IRouteProps = {

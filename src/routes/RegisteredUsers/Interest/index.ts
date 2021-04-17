@@ -1,4 +1,4 @@
-import { INTEREST_PATH } from '../../config/urls';
+import { INTEREST_PATH } from '../../../config/urls';
 import InterestView from './InterestView';
 
 const NotFoundRoute: IRouteProps = {

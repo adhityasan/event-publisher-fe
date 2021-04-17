@@ -1,4 +1,4 @@
-import { SIGNOUT_PATH } from '../../config/urls';
+import { SIGNOUT_PATH } from '../../../config/urls';
 import SignoutView from './SignoutView';
 
 const SignOutRoute: IRouteProps = {

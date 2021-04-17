@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Button, Spin, notification } from 'antd';
 import { useHistory } from 'react-router';
 import { InterestStyle } from './_InterestStyle';
-import { INTEREST_API, MASTER_EVENT_CATEGORIES_API } from '../../config/apiUrls';
-import { useAppContext } from '../../context/AppContext';
-import InterestTag from '../../components/InterestTag/InterestTag';
-import axiosInstance from '../../axios.instances';
+import { INTEREST_API, MASTER_EVENT_CATEGORIES_API } from '../../../config/apiUrls';
+import { useAppContext } from '../../../context/AppContext';
+import InterestTag from '../../../components/InterestTag/InterestTag';
+import axiosInstance from '../../../axios.instances';
 
 const InterestView = () => {
   const { appState, setAppState } = useAppContext();

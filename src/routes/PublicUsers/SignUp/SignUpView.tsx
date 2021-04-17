@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import { ReactComponent as UndrawLogic } from '../../assets/svg/undraw_logic.svg';
+import { ReactComponent as UndrawLogic } from '../../../assets/svg/undraw_logic.svg';
 import { SignUpStyle } from './_SignUpStyle';
 import SignupForm from './SignUpForm';
 

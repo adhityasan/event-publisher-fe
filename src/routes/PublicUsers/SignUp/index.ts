@@ -1,4 +1,4 @@
-import { SIGNUP_PATH } from '../../config/urls';
+import { SIGNUP_PATH } from '../../../config/urls';
 import SignUpView from './SignUpView';
 
 const SignUpRoute: IRouteProps = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import { ReactComponent as UndrawSafe } from '../../assets/svg/undraw_safe.svg';
+import { ReactComponent as UndrawSafe } from '../../../assets/svg/undraw_safe.svg';
 import { SignInStyle } from './_SignInStyle';
 import SigninForm from './SignInForm';
 

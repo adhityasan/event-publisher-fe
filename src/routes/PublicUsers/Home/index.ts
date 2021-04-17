@@ -1,4 +1,4 @@
-import { HOME_PATH } from '../../config/urls';
+import { HOME_PATH } from '../../../config/urls';
 import HomeView from './HomeView';
 
 const HomeRoute: IRouteProps = {

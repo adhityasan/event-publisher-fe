@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { desktops, tablets } from '../../assets/theme/breakpoints';
+import { desktops, tablets } from '../../../assets/theme/breakpoints';
 
 export const SignUpStyle = css`
   width: 100%;

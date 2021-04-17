@@ -1,4 +1,4 @@
-import { ABOUT_PATH } from '../../config/urls';
+import { ABOUT_PATH } from '../../../config/urls';
 import AboutView from './AboutView';
 
 const AboutRoute: IRouteProps = {

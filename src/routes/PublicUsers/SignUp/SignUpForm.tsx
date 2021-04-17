@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Form, Input, Button, Modal } from 'antd';
-import { SIGNIN_PATH } from '../../config/urls';
-import { SIGNUP_API } from '../../config/apiUrls';
+import { SIGNIN_PATH } from '../../../config/urls';
+import { SIGNUP_API } from '../../../config/apiUrls';
 import SignupSuccess from './components/SignupSuccess';
-import axiosInstance from '../../axios.instances';
+import axiosInstance from '../../../axios.instances';
 
 const layout = {
   labelCol: { span: 8 },

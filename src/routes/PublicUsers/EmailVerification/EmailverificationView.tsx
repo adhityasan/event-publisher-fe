@@ -3,11 +3,11 @@ import axios, { AxiosError } from 'axios';
 import React, { useCallback, useEffect } from 'react';
 import { Modal } from 'antd';
 import { useHistory } from 'react-router';
-import { ReactComponent as UndrawIdeation } from '../../assets/svg/undraw_ideation.svg';
-import { EMAIL_VERIFICATION_API } from '../../config/apiUrls';
-import { useQuery } from '../../utils/hooks/useQuery';
+import { ReactComponent as UndrawIdeation } from '../../../assets/svg/undraw_ideation.svg';
+import { EMAIL_VERIFICATION_API } from '../../../config/apiUrls';
+import { useQuery } from '../../../utils/hooks/useQuery';
 import { EmailVerificationStyle } from './_EmailVerificationStyle';
-import { SIGNIN_PATH } from '../../config/urls';
+import { SIGNIN_PATH } from '../../../config/urls';
 
 const EmailverificationView = () => {
   const query = useQuery();

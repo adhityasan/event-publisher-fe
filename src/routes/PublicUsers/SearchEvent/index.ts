@@ -1,4 +1,4 @@
-import { SEARCH_EVENT_PATH } from '../../config/urls';
+import { SEARCH_EVENT_PATH } from '../../../config/urls';
 import SearchEventView from './SearchEventView';
 
 const SearchEventRoute: IRouteProps = {

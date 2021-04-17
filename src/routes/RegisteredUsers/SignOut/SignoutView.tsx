@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import LoadingApp from '../../components/Loadings/LoadingApp';
-import { useAppContext } from '../../context/AppContext';
-import localStorage from '../../utils/localStorage';
+import LoadingApp from '../../../components/Loadings/LoadingApp';
+import { useAppContext } from '../../../context/AppContext';
+import localStorage from '../../../utils/localStorage';
 
 const SignoutView = () => {
   const { setAppState } = useAppContext();

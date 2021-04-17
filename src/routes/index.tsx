@@ -6,17 +6,16 @@ import localStorage from '../utils/localStorage';
 import { SIGNIN_API } from '../config/apiUrls';
 import { AppProvider } from '../context/AppContext';
 import axiosInstance from '../axios.instances';
-import Home from './Home';
-import NotFound from './NotFound';
-import About from './About';
-import Signin from './SignIn';
-import Signup from './SignUp';
-import SearchEvent from './SearchEvent';
-import EmailVerification from './EmailVerification';
-import Interest from './Interest';
-import SignOut from './SignOut';
+import PublicUsersRoutes from './PublicUsers';
+import RegisteredUsersRoutes from './RegisteredUsers';
+import EventOrganizersRoutes from './EventOrganizers';
+import NotFound from './PublicUsers/NotFound';
 
-const appRoutes = [Home, About, Signin, Signup, EmailVerification, SearchEvent, Interest, SignOut, NotFound];
+/**
+ * all path routes that app can handle
+ * NOTE: important to put NotFound page in the last index of appRoutes
+ */
+const appRoutes = [...PublicUsersRoutes, ...EventOrganizersRoutes, ...RegisteredUsersRoutes, NotFound];
 
 const InitRenderRoutes = () => {
   const [isAuthenticating, setIsAuthenticating] = useState(true);

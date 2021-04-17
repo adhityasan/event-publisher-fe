@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
-import UndrawLikeDislike from '../../assets/svg/undraw_like_dislike.svg';
-import { tablets } from '../../assets/theme/breakpoints';
+import UndrawLikeDislike from '../../../assets/svg/undraw_like_dislike.svg';
+import { tablets } from '../../../assets/theme/breakpoints';
 
 export const InterestStyle = css`
   display: flex;
