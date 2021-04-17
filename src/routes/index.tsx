@@ -28,7 +28,7 @@ const InitRenderRoutes = () => {
 
   useEffect(() => {
     const accessToken = localStorage.accessToken.get();
-    if (accessToken) {
+    if (accessToken && accessToken !== 'null') {
       axiosInstance
         .post(SIGNIN_API, { strategy: 'jwt', accessToken })
         .then(({ data }) =>
@@ -55,6 +55,10 @@ const InitRenderRoutes = () => {
             setIsAuthenticating(false);
           }, 300);
         });
+    } else {
+      setTimeout(() => {
+        setIsAuthenticating(false);
+      }, 300);
     }
   }, [history]);
 
