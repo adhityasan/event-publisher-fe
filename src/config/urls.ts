@@ -10,6 +10,7 @@ export const EMAIL_VERIFICATION_PATH = '/email-verification';
 // Registered Users Paths
 export const INTEREST_PATH = '/interest';
 export const RECOMMENDATION_EVENTS_PATH = '/events/recommendation';
+export const ACCOUNT_SETTING_PATH = '/account/settings';
 export const PROFILE_PATH = '/profile';
 export const UPDATE_PROFILE_PATH = '/profile/update';
 export const USER_PROFILE_PATH = '/users/profile/:userId';
@@ -17,6 +18,8 @@ export const LIST_EVENT_ORGANIZER_PATH = '/event-organizer/list';
 export const CREATE_EVENT_ORGANIZER_PATH = '/event-organizer/create';
 export const EVENT_REGISTRATION_PATH = '/event/:eventId/registration';
 export const SIGNOUT_PATH = '/signout';
+export const SAVED_EVENTS_PATH = '/events/saved';
+export const NOTIFICATION_PATH = '/notification';
 
 // Event Organizer Paths
 export const EO_PATH = '/eo';

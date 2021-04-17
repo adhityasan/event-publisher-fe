@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 import { phone, tablets } from '../../../assets/theme/breakpoints';
-import { primary } from '../../../assets/theme/colors';
+import { lightText, primary } from '../../../assets/theme/colors';
 
 export const RegisteredLayoutDesktopNavStyle = css`
   display: flex;
@@ -9,10 +9,11 @@ export const RegisteredLayoutDesktopNavStyle = css`
   height: 100%;
 
   .navlink {
-    color: rgba(0, 0, 0, 0.85);
+    color: ${lightText};
   }
   .active {
-    color: #665df5;
+    color: ${lightText};
+    background: #847cff;
   }
   .menu {
     display: none;
@@ -21,11 +22,21 @@ export const RegisteredLayoutDesktopNavStyle = css`
     width: 100%;
     @media (min-width: ${tablets}) {
       display: flex;
+      align-items: center;
+    }
+  }
+  .notification-icon {
+    svg {
+      width: 18px;
+      height: 18px;
     }
   }
   .menu-item {
     font-weight: 400;
     margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .icon {
       margin-right: 10px;
     }
@@ -34,30 +45,49 @@ export const RegisteredLayoutDesktopNavStyle = css`
     @media (min-width: ${tablets}) {
       display: none;
     }
+    color: ${lightText};
+    background: ${primary};
+    border-color: ${lightText};
+
     :hover {
-      color: ${primary};
-      border-color: ${primary};
+      color: ${lightText};
+      border-color: ${lightText};
+      border-width: 2px;
+    }
+  }
+  .user-menu {
+    margin: 0 10px;
+    background: ${primary};
+    span {
+      color: ${lightText};
+      text-transform: lowercase;
     }
   }
 `;
 
 export const RegisteredLayoutMobileNavStyle = css`
   .navlink {
-    color: rgba(0, 0, 0, 0.85);
+    color: inherit;
+  }
+  .active {
+    color: ${lightText};
   }
   .menu {
     width: 80%;
     margin: 0 10% 0 10%;
     display: flex;
+    align-items: center;
     flex-flow: column wrap;
     position: absolute;
     top: -1000px;
     left: 0;
     transition: all 0.5s;
     background: #fff;
-    border: 1px solid #ddd;
+    background: ${primary};
+    color: #fff;
+    /* border: 1px solid #ddd; */
     border-radius: 20px;
-    box-shadow: 0px 4px 10px rgba(217, 217, 217, 0.8);
+    box-shadow: 0px 4px 10px rgba(94, 44, 233, 0.8);
     @media (min-width: ${phone}) {
       width: 60%;
       margin: 0 20% 0 20%;
@@ -65,6 +95,18 @@ export const RegisteredLayoutMobileNavStyle = css`
     @media (min-width: ${tablets}) {
       display: none;
     }
+  }
+  .email-tag {
+    line-height: 15px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+  }
+  .first-child {
+    border-radius: 20px 20px 0 0;
   }
   .show {
     top: 30px;
@@ -81,4 +123,16 @@ export const RegisteredLayoutMobileNavStyle = css`
   }
 `;
 
-export default { RegisteredLayoutDesktopNavStyle, RegisteredLayoutMobileNavStyle };
+export const UserMenuStyle = css`
+  .user-menu-item {
+    line-height: 30px;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-transform: capitalize;
+    }
+  }
+`;
+
+export default { RegisteredLayoutDesktopNavStyle, RegisteredLayoutMobileNavStyle, UserMenuStyle };
