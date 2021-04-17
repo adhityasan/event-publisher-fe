@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, useHistory } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import LoadingApp from '../components/Loadings/LoadingApp';
 import { EventOrganizerRoute, PublicUserRoute, RegisteredUserRoute, PlainRoute } from '../components/Route';
 import localStorage from '../utils/localStorage';
 import { SIGNIN_API } from '../config/apiUrls';
 import { AppProvider } from '../context/AppContext';
 import axiosInstance from '../axios.instances';
-import { SERVER_ERROR_PATH } from '../config/urls';
+import { SERVER_ERROR_PATH, SIGNIN_PATH } from '../config/urls';
 import PublicUsersRoutes from './PublicUsers';
 import RegisteredUsersRoutes from './RegisteredUsers';
 import EventOrganizersRoutes from './EventOrganizers';
 import ServerError from './Errors/ServerError';
 import NotFound from './Errors/NotFound';
+import { ERROR_UNAUTHORIZED } from '../config/errorCode';
 
 /**
  * all path routes that app can handle
@@ -36,13 +38,17 @@ const InitRenderRoutes = () => {
             user: data.user
           })
         )
-        .catch((error) => {
+        .catch((error: AxiosError) => {
           if (localStorage.accessToken.isExist()) {
             localStorage.accessToken.remove();
           }
           // eslint-disable-next-line no-console
           console.error(error);
-          history.push(SERVER_ERROR_PATH);
+          if (error?.code && String(error.code) === ERROR_UNAUTHORIZED) {
+            history.push(SIGNIN_PATH);
+          } else {
+            history.push(SERVER_ERROR_PATH);
+          }
         })
         .finally(() => {
           setTimeout(() => {
