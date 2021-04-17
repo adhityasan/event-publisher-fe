@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, useHistory } from 'react-router-dom';
 import LoadingApp from '../components/Loadings/LoadingApp';
-import { EventOrganizerRoute, PublicUserRoute, RegisteredUserRoute } from '../components/Route';
+import { EventOrganizerRoute, PublicUserRoute, RegisteredUserRoute, PlainRoute } from '../components/Route';
 import localStorage from '../utils/localStorage';
 import { SIGNIN_API } from '../config/apiUrls';
 import { AppProvider } from '../context/AppContext';
 import axiosInstance from '../axios.instances';
+import { SERVER_ERROR_PATH } from '../config/urls';
 import PublicUsersRoutes from './PublicUsers';
 import RegisteredUsersRoutes from './RegisteredUsers';
 import EventOrganizersRoutes from './EventOrganizers';
-import NotFound from './PublicUsers/NotFound';
+import ServerError from './Errors/ServerError';
+import NotFound from './Errors/NotFound';
 
 /**
  * all path routes that app can handle
  * NOTE: important to put NotFound page in the last index of appRoutes
  */
-const appRoutes = [...PublicUsersRoutes, ...EventOrganizersRoutes, ...RegisteredUsersRoutes, NotFound];
+const appRoutes = [...PublicUsersRoutes, ...EventOrganizersRoutes, ...RegisteredUsersRoutes, ServerError, NotFound];
 
 const InitRenderRoutes = () => {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [appInitialContextValue, setAppInitialContextValue] = useState<AppContext.IState>();
+  const history = useHistory();
 
   useEffect(() => {
     const accessToken = localStorage.accessToken.get();
@@ -33,13 +36,21 @@ const InitRenderRoutes = () => {
             user: data.user
           })
         )
+        .catch((error) => {
+          if (localStorage.accessToken.isExist()) {
+            localStorage.accessToken.remove();
+          }
+          // eslint-disable-next-line no-console
+          console.error(error);
+          history.push(SERVER_ERROR_PATH);
+        })
         .finally(() => {
           setTimeout(() => {
             setIsAuthenticating(false);
           }, 300);
         });
     }
-  }, []);
+  }, [history]);
 
   return isAuthenticating ? (
     <LoadingApp width="100vw" height="100vh" />
@@ -52,6 +63,9 @@ const InitRenderRoutes = () => {
               return <EventOrganizerRoute {...route} key={i} />;
             }
             return <RegisteredUserRoute {...route} key={i} />;
+          }
+          if (route.layout === 'plain') {
+            return <PlainRoute {...route} key={i} />;
           }
           return <PublicUserRoute {...route} key={i} />;
         })}

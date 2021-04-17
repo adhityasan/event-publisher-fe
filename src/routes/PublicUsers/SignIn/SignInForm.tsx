@@ -28,8 +28,10 @@ const SigninForm = () => {
       })
       .then(({ data }) => {
         updateAppState({ accessToken: data?.accessToken, auth: true, user: data?.user });
-        localStorage.accessToken.isExist();
-        localStorage.accessToken.set(data?.accessToken);
+        if (!localStorage.accessToken.isExist()) {
+          localStorage.accessToken.init();
+          localStorage.accessToken.set(data?.accessToken);
+        }
         // REDIRECT TO INTEREST PAGE IF USER DOESN'T HAVE INTEREST CATEGORIES
         if (data?.user?.interest && data?.user?.interest?.length === 0) {
           history.push(INTEREST_PATH);
