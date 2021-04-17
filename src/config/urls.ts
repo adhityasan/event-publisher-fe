@@ -26,3 +26,7 @@ export const EO_CREATE_EVENT_PATH = EO_PATH + '/event/create';
 export const EO_UPDATE_EVENT_PATH = EO_PATH + '/event/:eventId/update';
 export const EO_CERTIFY_EVENT_PATH = EO_PATH + '/event/:eventId/certify';
 export const EO_COMMITTEE_PATH = EO_PATH + '/committee';
+
+// Error Paths
+export const NOT_FOUND_PATH = '*';
+export const SERVER_ERROR_PATH = '/500';

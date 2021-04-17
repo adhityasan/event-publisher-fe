@@ -1,12 +1,13 @@
+import { NOT_FOUND_PATH } from '../../../config/urls';
 import NotFoundView from './NotFoundView';
 
 const NotFoundRoute: IRouteProps = {
-  path: '*',
+  path: NOT_FOUND_PATH,
   component: NotFoundView,
   exact: false,
   strict: false,
   auth: false,
-  layout: 'public-user'
+  layout: 'plain'
 };
 
 export default NotFoundRoute;
