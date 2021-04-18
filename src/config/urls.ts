@@ -15,6 +15,8 @@ export const PROFILE_PATH = '/profile';
 export const UPDATE_PROFILE_PATH = '/profile/update';
 export const USER_PROFILE_PATH = '/users/profile/:userId';
 export const LIST_EVENT_ORGANIZER_PATH = '/event-organizer/list';
+export const DETAIL_EVENT_ORGANIZER_NO_ID_PATH = '/event-organizer/detail/';
+export const DETAIL_EVENT_ORGANIZER_PATH = DETAIL_EVENT_ORGANIZER_NO_ID_PATH + ':eventOrganizerId';
 export const CREATE_EVENT_ORGANIZER_PATH = '/event-organizer/create';
 export const EVENT_REGISTRATION_PATH = '/event/:eventId/registration';
 export const SIGNOUT_PATH = '/signout';
@@ -22,7 +24,8 @@ export const SAVED_EVENTS_PATH = '/events/saved';
 export const NOTIFICATION_PATH = '/notification';
 
 // Event Organizer Paths
-export const EO_PATH = '/eo';
+export const EO_PATH_NO_ID = '/eo/';
+export const EO_PATH = EO_PATH_NO_ID + ':eoId';
 export const EO_DASHBOARD_PATH = EO_PATH + '/dashboard';
 export const EO_LIST_EVENT_PATH = EO_PATH + '/event/list';
 export const EO_CREATE_EVENT_PATH = EO_PATH + '/event/create';

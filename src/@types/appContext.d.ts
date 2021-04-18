@@ -23,6 +23,24 @@ interface IUser {
   interest: Interest[];
 }
 
+interface IUsersEventOrganizer {
+  _id: string;
+  name: string;
+  description: string;
+  content: string;
+  pictureUrl: string;
+  creator: {
+    _id: string;
+    name: string;
+    email: string;
+  };
+  committee: any[];
+  contact: {
+    email: string;
+    phone: string;
+  };
+}
+
 declare namespace AppContext {
   interface IMaster {
     eventCategories: IEventCategories[];
@@ -33,6 +51,7 @@ declare namespace AppContext {
     auth: boolean;
     accessToken: string;
     user?: IUser | null;
+    users_event_organizers?: IUsersEventOrganizer[];
     _master_eventCategories?: any[];
     _master_eventFormats?: any[];
   }
