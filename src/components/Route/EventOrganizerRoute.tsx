@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { SIGNIN_AS_EO_PATH } from '../../config/urls';
+import { EO_DASHBOARD_PATH } from '../../config/urls';
 import { useAppContext } from '../../context/AppContext';
 import EventOrganizerLayout from '../../layouts/EventOrganizerLayout';
 
@@ -17,7 +17,7 @@ const EventOrganizerRoute = ({ component: Component, ...rest }: IRouteProps) => 
         ) : (
           <Redirect
             to={{
-              pathname: SIGNIN_AS_EO_PATH,
+              pathname: EO_DASHBOARD_PATH,
               state: { from: props.location }
             }}
           />
