@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { tablets } from '../../assets/theme/breakpoints';
 
 export const EventOrganizerLayoutStyle = css`
   .eo-sider-logo {
@@ -20,6 +21,27 @@ export const EventOrganizerLayoutStyle = css`
   .eo-header {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+  }
+
+  .eo-content {
+    padding: 20px;
+    h1 {
+      text-transform: capitalize;
+      font-size: 20px;
+      margin: 0 0 20px 0;
+      @media (min-width: ${tablets}) {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .eo-footer {
+    padding: 0;
+    height: 48px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
     align-items: center;
   }
 `;

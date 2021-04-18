@@ -89,7 +89,7 @@ const EventOrganizerLayoutView = ({ children }: any) => {
         <Content className="eo-content">{children}</Content>
         <Footer className="eo-footer">
           <Tooltip placement="top" title="by kao: @adhityasnjy">
-            <a href="https://github.com/adhityasan/event-publisher-fe">eventPublisher ©2020</a>
+            <a href="https://github.com/adhityasan/event-publisher-fe">event publisher ©2021</a>
           </Tooltip>
         </Footer>
       </Layout>
