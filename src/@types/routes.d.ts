@@ -1,3 +1,6 @@
+declare namespace Layout {
+  type names = 'public-user' | 'registered-user' | 'event-organizer' | 'plain';
+}
 declare interface IRouteProps {
   path: string;
   component: any;
