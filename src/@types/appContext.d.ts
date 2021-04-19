@@ -63,6 +63,8 @@ declare namespace AppContext {
     _master_event_categoris?: any[];
     _master_event_formats?: any[];
     eo_management?: IEoManagement;
+    eo_management_active_menu?: string;
+    eo_management_sider_collapse?: boolean;
   }
 
   type Dispatch = React.Dispatch<React.SetStateAction<IState>>;

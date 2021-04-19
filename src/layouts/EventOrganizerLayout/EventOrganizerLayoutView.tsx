@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import {
   CalendarOutlined,
   ExpandOutlined,
@@ -30,54 +30,65 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 
 const EventOrganizerLayoutView = ({ children }: any) => {
-  const { appState } = useAppContext();
-  const [isSiderCollapsed, setIsSiderCollapsed] = useState(false);
+  const { appState, setAppState } = useAppContext();
   const eoId = appState.eo_management?.eo._id || '';
+  const activeMenu = appState.eo_management_active_menu || 'eo-dashboard';
 
-  const toggleSiderCollapse = () => setIsSiderCollapsed(!isSiderCollapsed);
+  const toggleSiderCollapse = () => {
+    setAppState({ eo_management_sider_collapse: !appState.eo_management_sider_collapse });
+  };
+
+  const setActiveMenu = (key: string) => {
+    setAppState({ eo_management_active_menu: key });
+  };
 
   return (
     <Layout className={EventOrganizerLayoutStyle} style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={isSiderCollapsed} onCollapse={toggleSiderCollapse} className="eo-sider">
+      <Sider
+        collapsible
+        collapsed={!!appState.eo_management_sider_collapse}
+        onCollapse={toggleSiderCollapse}
+        className="eo-sider"
+      >
         <div className="eo-sider-logo">
-          <h1 className="eo-eventPublish-logo">{isSiderCollapsed ? '  eP' : 'eventPublisher'}</h1>
+          <h1 className="eo-eventPublish-logo">{!!appState.eo_management_sider_collapse ? '  eP' : 'eventPublisher'}</h1>
         </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" className="eo-menu">
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
+        <Menu theme="dark" selectedKeys={[activeMenu]} mode="inline" className="eo-menu">
+          <Menu.Item key="eo-dashboard" icon={<PieChartOutlined />} onClick={() => setActiveMenu('eo-dashboard')}>
             <Link to={EO_DASHBOARD_PATH.replace(':eoId', eoId)}>Dashboard</Link>
           </Menu.Item>
-          <SubMenu key="sub1" icon={<CalendarOutlined />} title="Events">
-            <Menu.Item key="2">
+          <SubMenu key="eo-events" icon={<CalendarOutlined />} title="Events">
+            <Menu.Item key="eo-events-create" onClick={() => setActiveMenu('eo-events-create')}>
               <Link to={EO_EVENT_CREATE_PATH.replace(':eoId', eoId)}>Create Event</Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="eo-events-drafted" onClick={() => setActiveMenu('eo-events-drafted')}>
               <Link to={EO_EVENT_DRAFTED_PATH.replace(':eoId', eoId)}>Drafted Events</Link>
             </Menu.Item>
-            <Menu.Item key="4">
+            <Menu.Item key="eo-events-upcoming" onClick={() => setActiveMenu('eo-events-upcoming')}>
               <Link to={EO_EVENT_UPCOMING_PATH.replace(':eoId', eoId)}>Upcominng Events</Link>
             </Menu.Item>
-            <Menu.Item key="5">
+            <Menu.Item key="eo-events-passed" onClick={() => setActiveMenu('eo-events-passed')}>
               <Link to={EO_EVENT_PASSED_PATH.replace(':eoId', eoId)}>Passed Events</Link>
             </Menu.Item>
           </SubMenu>
-          <SubMenu key="sub2" icon={<TeamOutlined />} title="Committee">
-            <Menu.Item key="7">
+          <SubMenu key="eo-committee" icon={<TeamOutlined />} title="Committee">
+            <Menu.Item key="eo-committee-list" onClick={() => setActiveMenu('eo-committee-list')}>
               <Link to={EO_COMMITTEE_LIST_PATH.replace(':eoId', eoId)}>Committee List</Link>
             </Menu.Item>
-            <Menu.Item key="8">
+            <Menu.Item key="eo-committee-invite" onClick={() => setActiveMenu('eo-committee-invite')}>
               <Link to={EO_COMMITTEE_INVITE_PATH.replace(':eoId', eoId)}>Invite Committee</Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="9" icon={<IdcardOutlined />}>
+          <Menu.Item key="eo-certification" onClick={() => setActiveMenu('eo-certification')} icon={<IdcardOutlined />}>
             <Link to={EO_CERTIFICATION_PATH.replace(':eoId', eoId)}>Certification</Link>
           </Menu.Item>
-          <Menu.Item key="10" icon={<ExpandOutlined />}>
+          <Menu.Item key="eo-preview" onClick={() => setActiveMenu('eo-preview')} icon={<ExpandOutlined />}>
             <Link to={EO_PREVIEW_PATH.replace(':eoId', eoId)}>E.O Preview</Link>
           </Menu.Item>
-          <Menu.Item key="11" icon={<SettingOutlined />}>
+          <Menu.Item key="eo-setttings" onClick={() => setActiveMenu('eo-setttings')} icon={<SettingOutlined />}>
             <Link to={EO_SETTINGS_PATH.replace(':eoId', eoId)}>E.O Settings</Link>
           </Menu.Item>
-          <Menu.Item key="12" icon={<PoweroffOutlined />}>
+          <Menu.Item key="eo-signout" onClick={() => setActiveMenu('eo-dashboard')} icon={<PoweroffOutlined />}>
             <Link to={LIST_EVENT_ORGANIZER_PATH.replace(':eoId', eoId)}>E.O Signout</Link>
           </Menu.Item>
         </Menu>
