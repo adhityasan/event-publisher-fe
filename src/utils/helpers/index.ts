@@ -19,3 +19,16 @@ export const getBase64 = (img: any, callback: (readerRes: any) => void): void =>
 export const setPictureUrl = (fileId: string): string => {
   return `${API_URL}/uploads/${fileId}`;
 };
+
+interface ISelectOption {
+  label: string;
+  value: any;
+}
+
+export const setSelectOptions = (data: any[], labelField: string, valueField: string): ISelectOption[] => {
+  const options: ISelectOption[] = data.map((val) => ({
+    label: val[labelField],
+    value: val[valueField]
+  }));
+  return options;
+};
