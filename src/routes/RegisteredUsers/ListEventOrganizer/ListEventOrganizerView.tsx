@@ -7,7 +7,7 @@ import { EVENT_ORGANIZER_API } from '../../../config/apiUrls';
 import { useAppContext } from '../../../context/AppContext';
 import Heading1 from '../../../components/PageHeadings/Heading1';
 import { ListEventOrganizerStyle } from './_ListEventOrganizerStyle';
-import { CREATE_EVENT_ORGANIZER_PATH, DETAIL_EVENT_ORGANIZER_NO_ID_PATH, EO_PATH_NO_ID } from '../../../config/urls';
+import { CREATE_EVENT_ORGANIZER_PATH, DETAIL_EVENT_ORGANIZER_NO_ID_PATH, EO_PATH } from '../../../config/urls';
 
 const ListEventOrganizerView = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +31,7 @@ const ListEventOrganizerView = () => {
   }, [appState.user?._id, setAppState]);
 
   const handleSigninEO = (eoId: string) => {
-    history.push(EO_PATH_NO_ID + eoId);
+    history.push(EO_PATH + `/${eoId}/dashboard`);
   };
 
   return (

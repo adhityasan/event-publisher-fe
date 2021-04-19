@@ -2,31 +2,18 @@ import React, { memo, useRef } from 'react';
 import { InboxOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, notification, Row, Upload } from 'antd';
 import { Link } from 'react-router-dom';
-import { UploadProps } from 'antd/lib/upload';
 import Heading1 from '../../../components/PageHeadings/Heading1';
 import { LIST_EVENT_ORGANIZER_PATH } from '../../../config/urls';
 import { CreateEventOrganizerStyle } from './CreateEventOrganizerStyle';
 import { setPictureUrl } from '../../../utils/helpers';
-import { UPLOADS_API, EVENT_ORGANIZER_API } from '../../../config/apiUrls';
-import { useAppContext } from '../../../context/AppContext';
+import { EVENT_ORGANIZER_API } from '../../../config/apiUrls';
 import axiosInstance from '../../../axios.instances';
+import { uploadProps } from '../../../config/uploadProps';
 
 const { Dragger } = Upload;
 
 const CreateEventOrganizerView = () => {
-  const { appState } = useAppContext();
   const resetButton = useRef<HTMLButtonElement>(null);
-
-  const uploadProps: UploadProps = {
-    name: 'file',
-    action: UPLOADS_API,
-    headers: {
-      authorization: `Bearer ${appState.accessToken}`
-    },
-    listType: 'picture-card',
-    className: 'avatar-uploader',
-    multiple: false
-  };
 
   const onSubmit = (values: any) => {
     const preparedData = {
@@ -108,7 +95,7 @@ const CreateEventOrganizerView = () => {
                 </p>
                 <p className="ant-upload-text">Click or drag file to this area to upload</p>
                 <p className="ant-upload-hint">
-                  upload your event organizer logo or profile picture, i will be you event organizer identifier
+                  upload your event organizer logo or profile picture, it will be you event organizer identifier
                 </p>
               </Dragger>
             </Form.Item>

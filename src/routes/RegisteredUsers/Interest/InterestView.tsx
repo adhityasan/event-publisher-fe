@@ -40,7 +40,7 @@ const InterestView = () => {
       .get(MASTER_EVENT_CATEGORIES_API, { params: { $limit: 50 } })
       .then(({ data }) => {
         if (data?.data) {
-          setAppState({ _master_eventCategories: data?.data });
+          setAppState({ _master_event_categoris: data?.data });
         }
       })
       // eslint-disable-next-line no-console
@@ -51,8 +51,8 @@ const InterestView = () => {
     <div className={InterestStyle}>
       <h1>WHAT INTEREST YOU ?</h1>
       <div className="interestPicker">
-        {appState._master_eventCategories && appState._master_eventCategories?.length > 0 ? (
-          appState._master_eventCategories.map((category) => (
+        {appState._master_event_categoris && appState._master_event_categoris?.length > 0 ? (
+          appState._master_event_categoris.map((category) => (
             <InterestTag
               key={category._id}
               isChecked={interestIds.includes(category._id)}
