@@ -6,6 +6,7 @@ import { EventOrganizerRoute, PublicUserRoute, RegisteredUserRoute, PlainRoute }
 import localStorage from '../utils/localStorage';
 import { SIGNIN_API } from '../config/apiUrls';
 import { AppProvider } from '../context/AppContext';
+import { EventProvider } from '../context/EventContext';
 import axiosInstance from '../axios.instances';
 import { SERVER_ERROR_PATH, SIGNIN_PATH } from '../config/urls';
 import PublicUsersRoutes from './PublicUsers';
@@ -66,20 +67,22 @@ const InitRenderRoutes = () => {
     <LoadingApp width="100vw" height="100vh" />
   ) : (
     <AppProvider key="eventpublish-context-provider" initialState={appInitialContextValue}>
-      <Switch>
-        {appRoutes.map((route, i) => {
-          if (route.auth) {
-            if (route.layout === 'event-organizer') {
-              return <EventOrganizerRoute {...route} key={i} />;
+      <EventProvider key="eventpublish-context-provider" initialState={appInitialContextValue}>
+        <Switch>
+          {appRoutes.map((route, i) => {
+            if (route.auth) {
+              if (route.layout === 'event-organizer') {
+                return <EventOrganizerRoute {...route} key={i} />;
+              }
+              return <RegisteredUserRoute {...route} key={i} />;
             }
-            return <RegisteredUserRoute {...route} key={i} />;
-          }
-          if (route.layout === 'plain') {
-            return <PlainRoute {...route} key={i} />;
-          }
-          return <PublicUserRoute {...route} key={i} />;
-        })}
-      </Switch>
+            if (route.layout === 'plain') {
+              return <PlainRoute {...route} key={i} />;
+            }
+            return <PublicUserRoute {...route} key={i} />;
+          })}
+        </Switch>
+      </EventProvider>
     </AppProvider>
   );
 };
