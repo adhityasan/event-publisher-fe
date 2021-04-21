@@ -49,6 +49,10 @@ interface IEoManagement {
   eo: IEventOrganizer;
 }
 
+interface IGeolocation {
+  lat: number;
+  lng: number;
+}
 declare namespace AppContext {
   interface IMaster {
     eventCategories: IEventCategories[];
@@ -65,6 +69,8 @@ declare namespace AppContext {
     eo_management?: IEoManagement;
     eo_management_active_menu?: string;
     eo_management_sider_collapse?: boolean;
+    location?: string;
+    geolocation?: IGeolocation;
   }
 
   type Dispatch = React.Dispatch<React.SetStateAction<IState>>;
