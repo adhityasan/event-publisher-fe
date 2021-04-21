@@ -1,6 +1,5 @@
 import io from 'socket.io-client';
-
-import { API_URL, APP_USE_SOCKET_IO } from './config/app';
+import { API_URL, APP_USE_SOCKET_IO, GOOGLE_API_KEY } from './config/app';
 import localStorage from './utils/localStorage/index';
 
 import { onConnect } from './utils/sockets';
@@ -58,7 +57,16 @@ const connectSocketIOClient = (): void => {
   }
 };
 
+const loadGoogleMapAPI = () => {
+  const script = document.createElement('script');
+
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`;
+  script.async = true;
+
+  document.body.appendChild(script);
+};
 export default function (): void {
   initLocalStorage();
   connectSocketIOClient();
+  loadGoogleMapAPI();
 }

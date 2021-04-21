@@ -23,24 +23,36 @@ interface IUser {
   interest: Interest[];
 }
 
-interface IUsersEventOrganizer {
+interface ICommittee {
+  _id: string;
+  name: string;
+  email: string;
+}
+interface IEventOrganizer {
   _id: string;
   name: string;
   description: string;
   content: string;
   pictureUrl: string;
-  creator: {
-    _id: string;
-    name: string;
-    email: string;
-  };
-  committee: any[];
+  creator: ICommittee;
+  committee: ICommittee[];
   contact: {
     email: string;
     phone: string;
   };
+  createdAt?: string;
+  updatedAt?: string;
 }
 
+interface IEoManagement {
+  role: 'creator' | 'committee';
+  eo: IEventOrganizer;
+}
+
+interface IGeolocation {
+  lat: number;
+  lng: number;
+}
 declare namespace AppContext {
   interface IMaster {
     eventCategories: IEventCategories[];
@@ -51,9 +63,14 @@ declare namespace AppContext {
     auth: boolean;
     accessToken: string;
     user?: IUser | null;
-    users_event_organizers?: IUsersEventOrganizer[];
-    _master_eventCategories?: any[];
-    _master_eventFormats?: any[];
+    users_event_organizers?: IEventOrganizer[];
+    _master_event_categoris?: any[];
+    _master_event_formats?: any[];
+    eo_management?: IEoManagement;
+    eo_management_active_menu?: string;
+    eo_management_sider_collapse?: boolean;
+    location?: string;
+    geolocation?: IGeolocation;
   }
 
   type Dispatch = React.Dispatch<React.SetStateAction<IState>>;
