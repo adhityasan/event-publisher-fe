@@ -10,7 +10,7 @@ const OnlilneEvents = () => {
   useEffect(() => {
     axiosInstance.get(MASTER_EVENT_FORMATS_API, { params: { format: 'online' } }).then(({ data }) => {
       const onlineFormatId: string = data.data[0]._id;
-      axiosInstance.get(EVENTS_API, { params: { eventFormats: onlineFormatId } }).then(({ data: oE }) => {
+      axiosInstance.get(EVENTS_API, { params: { eventFormats: onlineFormatId, isPublished: true } }).then(({ data: oE }) => {
         setOnlineEvents(oE.data);
       });
     });

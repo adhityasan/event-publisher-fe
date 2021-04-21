@@ -10,7 +10,7 @@ const FreshEventCarousel = () => {
 
   useEffect(() => {
     axiosInstance
-      .get(EVENTS_API, { params: { $limit: 4, $sort: { createdAt: -1 } } })
+      .get(EVENTS_API, { params: { $limit: 4, $sort: { createdAt: -1 }, isPublished: true } })
       .then(({ data }) => {
         setFreshEvents(data.data);
       })

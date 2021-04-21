@@ -8,7 +8,7 @@ const TrendingEvents = () => {
   const [trendingEvents, setTrendingEvents] = useState([]);
 
   useEffect(() => {
-    axiosInstance.get(EVENTS_API, { params: { $limit: 6 } }).then(({ data: tE }) => {
+    axiosInstance.get(EVENTS_API, { params: { $limit: 6, isPublished: true } }).then(({ data: tE }) => {
       setTrendingEvents(tE.data);
     });
   }, []);

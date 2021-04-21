@@ -20,7 +20,7 @@ const EventsNearMe = () => {
       }
     };
     axiosInstance
-      .get(EVENTS_API, { params: { geolocation: nearQuery, geometry: true, parseGeolocation: true } })
+      .get(EVENTS_API, { params: { geolocation: nearQuery, geometry: true, parseGeolocation: true, isPublished: true } })
       .then(({ data }) => {
         setNearEvents(data);
       });
