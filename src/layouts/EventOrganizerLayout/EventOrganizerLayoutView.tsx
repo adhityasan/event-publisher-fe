@@ -65,7 +65,7 @@ const EventOrganizerLayoutView = ({ children }: any) => {
               <Link to={EO_EVENT_DRAFTED_PATH.replace(':eoId', eoId)}>Drafted Events</Link>
             </Menu.Item>
             <Menu.Item key="eo-events-upcoming" onClick={() => setActiveMenu('eo-events-upcoming')}>
-              <Link to={EO_EVENT_UPCOMING_PATH.replace(':eoId', eoId)}>Upcominng Events</Link>
+              <Link to={EO_EVENT_UPCOMING_PATH.replace(':eoId', eoId)}>Upcoming Events</Link>
             </Menu.Item>
             <Menu.Item key="eo-events-passed" onClick={() => setActiveMenu('eo-events-passed')}>
               <Link to={EO_EVENT_PASSED_PATH.replace(':eoId', eoId)}>Passed Events</Link>
