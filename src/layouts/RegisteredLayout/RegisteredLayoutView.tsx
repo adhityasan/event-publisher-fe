@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Col, Row } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { RegisteredLayoutStyle } from './_RegisteredLayoutStyle';
 import { RegisteredLayoutDesktopNav, RegisteredLayoutMobileNav } from './components/RegisteredLayoutNav';
+import ModalCommitteeInvitation from '../../components/Modals/ModalCommitteeInvitation';
+import { useAppContext } from '../../context/AppContext';
 
 const { Content, Header } = Layout;
 
 const RegisteredLayoutView = ({ children }: any) => {
+  const location = useLocation();
+  const history = useHistory();
   const [isShowMobileNav, setIsShowMobileNav] = useState(false);
+  const { appState } = useAppContext();
 
   const toggleMobileNav = () => {
     setIsShowMobileNav(!isShowMobileNav);
@@ -26,7 +31,14 @@ const RegisteredLayoutView = ({ children }: any) => {
 
   useEffect(() => {
     window.addEventListener('scroll', listenScrollEvent);
+    return () => {
+      window.removeEventListener('scroll', listenScrollEvent);
+    };
   }, []);
+
+  const handleCloseModal = () => {
+    history.push(location.pathname);
+  };
 
   return (
     <div className={RegisteredLayoutStyle}>
@@ -48,6 +60,11 @@ const RegisteredLayoutView = ({ children }: any) => {
         </Header>
         <Content className="content">{children}</Content>
       </Layout>
+      <ModalCommitteeInvitation
+        isVisible={location.hash === '#committee-invitation'}
+        handleClose={handleCloseModal}
+        data={appState.hashModalData}
+      />
     </div>
   );
 };

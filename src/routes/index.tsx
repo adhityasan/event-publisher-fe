@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, useHistory } from 'react-router-dom';
 import { AxiosError } from 'axios';
+import { notification } from 'antd';
 import LoadingApp from '../components/Loadings/LoadingApp';
 import { EventOrganizerRoute, PublicUserRoute, RegisteredUserRoute, PlainRoute } from '../components/Route';
 import localStorage from '../utils/localStorage';
@@ -15,6 +16,10 @@ import EventOrganizersRoutes from './EventOrganizers';
 import ServerError from './Errors/ServerError';
 import NotFound from './Errors/NotFound';
 import { ERROR_UNAUTHORIZED } from '../config/errorCode';
+import { useSocketContext } from '../context/SocketContext';
+import { emitAuthentication } from '../sockets.api/Authentication';
+import { subsNotification, unsubsNotification } from '../sockets.api/NotificationsSocket';
+import { useNotificationsContext } from '../context/NotificationContext';
 
 /**
  * all path routes that app can handle
@@ -24,21 +29,40 @@ const appRoutes = [...PublicUsersRoutes, ...EventOrganizersRoutes, ...Registered
 
 const InitRenderRoutes = () => {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const { socket } = useSocketContext();
+  const { setNotification } = useNotificationsContext();
   const [appInitialContextValue, setAppInitialContextValue] = useState<AppContext.IState>();
   const history = useHistory();
 
   useEffect(() => {
     const accessToken = localStorage.accessToken.get();
     if (accessToken && accessToken !== 'null') {
+      // make sure no double subsribe on notification socket connection
+      unsubsNotification(socket);
       axiosInstance
         .post(SIGNIN_API, { strategy: 'jwt', accessToken })
-        .then(({ data }) =>
+        .then(({ data }) => {
+          // socket.io client authentication
+          emitAuthentication(socket, accessToken).then(() => {
+            subsNotification(socket, (data: any) => {
+              // set notification data to notificationContext
+              setNotification(data);
+              // show notification
+              notification.info({
+                message: data.message,
+                placement: 'topRight',
+                top: 74,
+                duration: 8
+              });
+            });
+          });
+          // set app context initial value
           setAppInitialContextValue({
             auth: true,
             accessToken: data.accessToken,
             user: data.user
-          })
-        )
+          });
+        })
         .catch((error: AxiosError) => {
           if (localStorage.accessToken.isExist()) {
             localStorage.accessToken.remove();
@@ -61,7 +85,7 @@ const InitRenderRoutes = () => {
         setIsAuthenticating(false);
       }, 300);
     }
-  }, [history]);
+  }, [history, socket, setNotification]);
 
   return isAuthenticating ? (
     <LoadingApp width="100vw" height="100vh" />

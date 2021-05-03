@@ -9,3 +9,4 @@ export const MASTER_EVENT_FORMATS_API = API_URL + '/master/event-formats';
 export const EVENT_ORGANIZER_API = API_URL + '/event-organizers';
 export const UPLOADS_API = API_URL + '/uploads';
 export const EVENTS_API = API_URL + '/events';
+export const NOTIFICATIONS_API = API_URL + '/notifications';

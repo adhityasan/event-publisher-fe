@@ -71,6 +71,7 @@ declare namespace AppContext {
     eo_management_sider_collapse?: boolean;
     location?: string;
     geolocation?: IGeolocation;
+    hashModalData?: any;
   }
 
   type Dispatch = React.Dispatch<React.SetStateAction<IState>>;
