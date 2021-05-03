@@ -10,3 +10,5 @@ export const EVENT_ORGANIZER_API = API_URL + '/event-organizers';
 export const UPLOADS_API = API_URL + '/uploads';
 export const EVENTS_API = API_URL + '/events';
 export const NOTIFICATIONS_API = API_URL + '/notifications';
+export const USERS_API = API_URL + '/users';
+export const ACTION_INVITE_COMMITTEE_API = API_URL + '/action/invite-committee';
