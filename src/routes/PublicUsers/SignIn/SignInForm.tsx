@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, notification } from 'antd';
+import QueryString from 'qs';
 import { INTEREST_PATH, SIGNUP_PATH } from '../../../config/urls';
-import { SIGNIN_API } from '../../../config/apiUrls';
+import { NOTIFICATIONS_API, SIGNIN_API } from '../../../config/apiUrls';
 import { useAppContext } from '../../../context/AppContext';
 import localStorage from '../../../utils/localStorage';
 import axiosInstance from '../../../axios.instances';
+import { useSocketContext } from '../../../context/SocketContext';
+import { emitAuthentication } from '../../../sockets.api/Authentication';
+import { subsNotification } from '../../../sockets.api/NotificationsSocket';
+import { useNotificationsContext } from '../../../context/NotificationContext';
 
 const layout = {
   labelCol: { span: 6 },
@@ -16,6 +21,8 @@ const tailLayout = {
 };
 
 const SigninForm = () => {
+  const { socket } = useSocketContext();
+  const { setNotification, updateNotifications } = useNotificationsContext();
   const { updateAppState } = useAppContext();
   const history = useHistory();
 
@@ -27,11 +34,41 @@ const SigninForm = () => {
         strategy: 'local'
       })
       .then(({ data }) => {
-        updateAppState({ accessToken: data?.accessToken, auth: true, user: data?.user });
+        const notificationsQueryString = QueryString.stringify(
+          {
+            to: data.user._id,
+            isOpened: false,
+            $sort: {
+              createdAt: -1
+            }
+          },
+          { addQueryPrefix: true }
+        );
+        // get notifications
+        axiosInstance.get(NOTIFICATIONS_API + notificationsQueryString).then(({ data }) => {
+          updateNotifications(data.data);
+        });
+        // socket.io client authentication
+        emitAuthentication(socket, data?.accessToken).then(() => {
+          subsNotification(socket, (data: any) => {
+            // set notification data to notificationContext
+            setNotification(data);
+            // show notification
+            notification.info({
+              message: data.message,
+              placement: 'topRight',
+              top: 74,
+              duration: 8
+            });
+          });
+        });
+        // set local storage accessToken
         if (!localStorage.accessToken.isExist()) {
           localStorage.accessToken.init();
           localStorage.accessToken.set(data?.accessToken);
         }
+        // set app context initial value
+        updateAppState({ accessToken: data?.accessToken, auth: true, user: data?.user });
         // REDIRECT TO INTEREST PAGE IF USER DOESN'T HAVE INTEREST CATEGORIES
         if (data?.user?.interest && data?.user?.interest?.length === 0) {
           history.push(INTEREST_PATH);

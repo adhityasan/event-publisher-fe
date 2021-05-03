@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dropdown, Menu } from 'antd';
+import { Badge, Button, Dropdown, Menu, Popover } from 'antd';
 import {
   UserOutlined,
   MenuOutlined,
@@ -17,14 +17,17 @@ import {
   ACCOUNT_SETTING_PATH,
   INTEREST_PATH,
   LIST_EVENT_ORGANIZER_PATH,
-  NOTIFICATION_PATH,
   SAVED_EVENTS_PATH,
   SEARCH_EVENT_PATH,
   SIGNOUT_PATH
 } from '../../../config/urls';
 import { useAppContext } from '../../../context/AppContext';
+import { useSocketContext } from '../../../context/SocketContext';
+import { emitLogout } from '../../../sockets.api/Authentication';
+import { useNotificationsContext } from '../../../context/NotificationContext';
+import NotificationList from '../../../components/Notifications/NotificationList';
 
-const userMenus = (
+const UserMenus = ({ socket }: any) => (
   <Menu className={RegisteredLayoutNav.UserMenuStyle}>
     <Menu.Item className="user-menu-item">
       <NavLink to={LIST_EVENT_ORGANIZER_PATH}>
@@ -51,7 +54,7 @@ const userMenus = (
       </NavLink>
     </Menu.Item>
     <Menu.Item className="user-menu-item">
-      <NavLink to={SIGNOUT_PATH}>
+      <NavLink to={SIGNOUT_PATH} onClick={() => emitLogout(socket)}>
         <LoginOutlined />
         Sign Out
       </NavLink>
@@ -61,6 +64,7 @@ const userMenus = (
 
 const Menus = ({ menuClassName }: { menuClassName?: string }) => {
   const { appState } = useAppContext();
+  const { socket } = useSocketContext();
   return (
     <div className={menuClassName}>
       <NavLink to={SEARCH_EVENT_PATH} className="navlink">
@@ -69,7 +73,7 @@ const Menus = ({ menuClassName }: { menuClassName?: string }) => {
           SEARCH EVENT
         </div>
       </NavLink>
-      <Dropdown className="user-menu" overlay={userMenus} placement="topRight">
+      <Dropdown className="user-menu" overlay={<UserMenus socket={socket} />} placement="topRight" trigger={['click']}>
         <Button className="user-menu-button">
           <UserOutlined className="icon" />
           {appState.user?.email}
@@ -80,14 +84,23 @@ const Menus = ({ menuClassName }: { menuClassName?: string }) => {
 };
 
 export const RegisteredLayoutDesktopNav = ({ toggleMobileNav }: { toggleMobileNav: () => void }) => {
+  const { notificationsCount } = useNotificationsContext();
   return (
     <div className={RegisteredLayoutNav.RegisteredLayoutDesktopNavStyle}>
       <Menus menuClassName="menu" />
-      <NavLink to={NOTIFICATION_PATH} className="navlink">
+      <Popover
+        className="user-notifications-list"
+        title="notifications"
+        content={<NotificationList />}
+        placement="bottomRight"
+        trigger="hover"
+      >
         <div className="menu-item">
-          <BellOutlined className="icon notification-icon" />
+          <Badge count={notificationsCount} offset={[-7, 0]} size="small">
+            <BellOutlined className="icon notification-icon" />
+          </Badge>
         </div>
-      </NavLink>
+      </Popover>
       <Button
         className="burger-button"
         type="default"
@@ -101,6 +114,7 @@ export const RegisteredLayoutDesktopNav = ({ toggleMobileNav }: { toggleMobileNa
 
 const MobileMenus = ({ menuClassName }: { menuClassName?: string }) => {
   const { appState } = useAppContext();
+  const { socket } = useSocketContext();
   return (
     <div className={menuClassName}>
       <NavLink to={SEARCH_EVENT_PATH} className="navlink">
@@ -134,7 +148,7 @@ const MobileMenus = ({ menuClassName }: { menuClassName?: string }) => {
           Accounts Settings
         </div>
       </NavLink>
-      <NavLink to={SIGNOUT_PATH} className="navlink">
+      <NavLink to={SIGNOUT_PATH} className="navlink" onClick={() => emitLogout(socket)}>
         <div className="menu-item">
           <LoginOutlined className="icon" />
           Sign Out

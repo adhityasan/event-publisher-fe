@@ -1,8 +1,5 @@
-import io from 'socket.io-client';
-import { API_URL, APP_USE_SOCKET_IO, GOOGLE_API_KEY } from './config/app';
+import { GOOGLE_API_KEY } from './config/app';
 import localStorage from './utils/localStorage/index';
-
-import { onConnect } from './utils/sockets';
 
 // initial or update localStorage data
 export const initLocalStorage = (): void => {
@@ -39,24 +36,7 @@ export const initLocalStorage = (): void => {
   });
 };
 
-declare global {
-  interface Window {
-    socket: SocketIOClient.Socket;
-  }
-}
-
-const connectSocketIOClient = (): void => {
-  if (API_URL && APP_USE_SOCKET_IO) {
-    const socket = io(API_URL);
-    window.socket = socket;
-
-    onConnect(() => {
-      // eslint-disable-next-line no-console
-      console.log('socket.IO connected');
-    });
-  }
-};
-
+// Load google map api from googleapis.com
 const loadGoogleMapAPI = () => {
   const script = document.createElement('script');
 
@@ -65,8 +45,9 @@ const loadGoogleMapAPI = () => {
 
   document.body.appendChild(script);
 };
+
+// export default function that will run the while initiator function
 export default function (): void {
   initLocalStorage();
-  connectSocketIOClient();
   loadGoogleMapAPI();
 }
