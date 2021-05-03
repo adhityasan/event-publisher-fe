@@ -26,9 +26,11 @@ export const RegisteredLayoutDesktopNavStyle = css`
     }
   }
   .notification-icon {
+    cursor: pointer;
     svg {
       width: 18px;
       height: 18px;
+      color: #fff;
     }
   }
   .menu-item {
