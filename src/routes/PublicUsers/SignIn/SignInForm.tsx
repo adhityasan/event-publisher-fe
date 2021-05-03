@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, notification } from 'antd';
+import QueryString from 'qs';
 import { INTEREST_PATH, SIGNUP_PATH } from '../../../config/urls';
-import { SIGNIN_API } from '../../../config/apiUrls';
+import { NOTIFICATIONS_API, SIGNIN_API } from '../../../config/apiUrls';
 import { useAppContext } from '../../../context/AppContext';
 import localStorage from '../../../utils/localStorage';
 import axiosInstance from '../../../axios.instances';
@@ -21,7 +22,7 @@ const tailLayout = {
 
 const SigninForm = () => {
   const { socket } = useSocketContext();
-  const { setNotification } = useNotificationsContext();
+  const { setNotification, updateNotifications } = useNotificationsContext();
   const { updateAppState } = useAppContext();
   const history = useHistory();
 
@@ -33,6 +34,20 @@ const SigninForm = () => {
         strategy: 'local'
       })
       .then(({ data }) => {
+        const notificationsQueryString = QueryString.stringify(
+          {
+            to: data.user._id,
+            isOpened: false,
+            $sort: {
+              createdAt: -1
+            }
+          },
+          { addQueryPrefix: true }
+        );
+        // get notifications
+        axiosInstance.get(NOTIFICATIONS_API + notificationsQueryString).then(({ data }) => {
+          updateNotifications(data.data);
+        });
         // socket.io client authentication
         emitAuthentication(socket, data?.accessToken).then(() => {
           subsNotification(socket, (data: any) => {
