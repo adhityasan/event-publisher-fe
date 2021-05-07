@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { SIGNUP_PATH } from '../../../config/urls';
-import SignUpView from './SignUpView';
+
+const SignUpView = loadable(() => import(/* webpackChunkName: "sign-up-view" */ './SignUpView'));
 
 const SignUpRoute: IRouteProps = {
   path: SIGNUP_PATH,

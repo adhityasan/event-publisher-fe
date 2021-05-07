@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { EMAIL_VERIFICATION_PATH } from '../../../config/urls';
-import EmailVerificationView from './EmailverificationView';
+
+const EmailVerificationView = loadable(() => import(/* webpackChunkName: "email-verification-view" */ './EmailverificationView'));
 
 const EmailVerificationRoute: IRouteProps = {
   path: EMAIL_VERIFICATION_PATH,

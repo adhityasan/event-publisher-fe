@@ -1,7 +1,9 @@
+import loadable from '@loadable/component';
 import { EO_DASHBOARD_PATH } from '../../../config/urls';
-import DashboardView from './DashboardView';
 
-const SignOutRoute: IRouteProps = {
+const DashboardView = loadable(() => import(/* webpackChunkName: "dashboard-view" */ './DashboardView'));
+
+const dashboardRoute: IRouteProps = {
   path: EO_DASHBOARD_PATH,
   component: DashboardView,
   exact: true,
@@ -10,4 +12,4 @@ const SignOutRoute: IRouteProps = {
   layout: 'event-organizer'
 };
 
-export default SignOutRoute;
+export default dashboardRoute;

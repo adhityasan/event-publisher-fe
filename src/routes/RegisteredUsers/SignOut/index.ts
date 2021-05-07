@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { SIGNOUT_PATH } from '../../../config/urls';
-import SignoutView from './SignoutView';
+
+const SignoutView = loadable(() => import(/* webpackChunkName: "sign-out-view" */ './SignoutView'));
 
 const SignOutRoute: IRouteProps = {
   path: SIGNOUT_PATH,

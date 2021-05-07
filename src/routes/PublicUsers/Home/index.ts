@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { HOME_PATH } from '../../../config/urls';
-import HomeView from './HomeView';
+
+const HomeView = loadable(() => import(/* webpackChunkName: "home-view" */ './HomeView'));
 
 const HomeRoute: IRouteProps = {
   path: HOME_PATH,

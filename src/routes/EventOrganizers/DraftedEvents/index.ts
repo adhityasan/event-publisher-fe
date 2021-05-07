@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { EO_EVENT_DRAFTED_PATH } from '../../../config/urls';
-import DraftedEventsView from './DraftedEventsView';
+
+const DraftedEventsView = loadable(() => import(/* webpackChunkName: "drafted-events-view" */ './DraftedEventsView'));
 
 const draftedEventRoute: IRouteProps = {
   path: EO_EVENT_DRAFTED_PATH,
