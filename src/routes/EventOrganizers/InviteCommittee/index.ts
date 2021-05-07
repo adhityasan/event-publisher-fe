@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { EO_COMMITTEE_INVITE_PATH } from '../../../config/urls';
-import InviteCommitteeView from './InviteCommitteeView';
+
+const InviteCommitteeView = loadable(() => import(/* webpackChunkName: "invite-committee-view" */ './InviteCommitteeView'));
 
 const draftedEventRoute: IRouteProps = {
   path: EO_COMMITTEE_INVITE_PATH,

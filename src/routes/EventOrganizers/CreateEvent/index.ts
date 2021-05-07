@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { EO_EVENT_CREATE_PATH } from '../../../config/urls';
-import CreateEventView from './CreateEventView';
+
+const CreateEventView = loadable(() => import(/* webpackChunkName: "create-event-view" */ './CreateEventView'));
 
 const CreateEventRoute: IRouteProps = {
   path: EO_EVENT_CREATE_PATH,

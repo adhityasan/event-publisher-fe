@@ -1,9 +1,11 @@
+import loadable from '@loadable/component';
 import { EO_EVENT_PASSED_PATH } from '../../../config/urls';
-import UpcomingEventsView from './PassedEventsView';
+
+const PassedEventsView = loadable(() => import(/* webpackChunkName: "passed-events-view" */ './PassedEventsView'));
 
 const passedEventRoute: IRouteProps = {
   path: EO_EVENT_PASSED_PATH,
-  component: UpcomingEventsView,
+  component: PassedEventsView,
   exact: true,
   strict: false,
   auth: true,

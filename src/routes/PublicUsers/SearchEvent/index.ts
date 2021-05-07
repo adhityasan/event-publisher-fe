@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { SEARCH_EVENT_PATH } from '../../../config/urls';
-import SearchEventView from './SearchEventView';
+
+const SearchEventView = loadable(() => import(/* webpackChunkName: "search-event-view" */ './SearchEventView'));
 
 const SearchEventRoute: IRouteProps = {
   path: SEARCH_EVENT_PATH,
