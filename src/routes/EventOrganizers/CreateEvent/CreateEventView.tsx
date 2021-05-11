@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, DatePicker, Form, Input, notification, Row, Select } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import Dragger from 'antd/lib/upload/Dragger';
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { useParams } from 'react-router';
 import EoAccessHOC from '../../../components/EoAccessHOC/EoAccessHOC';
 import Heading1 from '../../../components/PageHeadings/Heading1';
@@ -41,12 +41,12 @@ const CreateEventView = () => {
     });
   }, []);
 
-  const onPlaceSelected = (place?: { label: string; value: any }) => {
+  const onPlaceSelected = (place: string) => {
     // set location field value first
     form.setFieldsValue({ location: place });
 
-    if (place && place.label) {
-      geocodeByAddress(place.label)
+    if (place) {
+      geocodeByAddress(place)
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
           setGeolocation({ type: 'Point', coordinates: [lng, lat] });
