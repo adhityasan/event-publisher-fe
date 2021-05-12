@@ -186,7 +186,7 @@ const CreateEventView = () => {
                     <p className="ant-upload-hint">upload your event banner , it will be your event identifier</p>
                   </Dragger>
                 </Form.Item>
-                <Form.Item label="Event Location" name="location" rules={[{ required: true, message: 'Please choose format!' }]}>
+                <Form.Item label="Event Location" name="location">
                   <PlaceAutoComplete onSelect={onPlaceSelected} />
                 </Form.Item>
               </Col>
