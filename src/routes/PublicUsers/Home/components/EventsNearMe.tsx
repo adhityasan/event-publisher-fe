@@ -31,7 +31,7 @@ const EventsNearMe = () => {
       <Row gutter={[24, 24]} justify="start">
         {nearEvents.length > 0 ? (
           nearEvents.map((event: any) => (
-            <Col xs={24} sm={12} md={8} key={event._id}>
+            <Col xs={24} sm={12} lg={8} key={event._id}>
               <EventCard
                 id={event._id}
                 bannerUrl={event.bannerUrl}

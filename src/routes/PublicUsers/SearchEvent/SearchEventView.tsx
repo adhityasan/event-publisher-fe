@@ -13,7 +13,7 @@ import { searchEventsStyle } from './_SearchEventsStyle';
 
 const defaultQs = {
   isPublished: true,
-  $limit: 9,
+  $limit: 6,
   $sort: { createdAt: -1 }
 };
 
@@ -66,7 +66,7 @@ const SearchEventView = () => {
             <Row gutter={[12, 12]}>
               {events.length > 0 ? (
                 events.map((event) => (
-                  <Col key={event._id} xs={24} md={12} lg={8}>
+                  <Col key={event._id} xs={24} sm={12} md={12} lg={12} xl={8}>
                     <EventCard id={event._id} {...event} />
                   </Col>
                 ))

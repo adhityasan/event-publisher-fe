@@ -18,7 +18,7 @@ const TrendingEvents = () => {
       <Row gutter={[24, 24]} justify="start">
         {trendingEvents.length > 0 ? (
           trendingEvents.map((event: any) => (
-            <Col xs={24} sm={12} md={8} key={event._id}>
+            <Col xs={24} sm={12} lg={8} key={event._id}>
               <EventCard
                 id={event._id}
                 bannerUrl={event.bannerUrl}

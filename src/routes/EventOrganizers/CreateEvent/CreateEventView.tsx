@@ -75,9 +75,9 @@ const CreateEventView = () => {
       endDate: values.endDate.unix(),
       startTime: values.startTime.format('hh:mm a'),
       endTime: values.endTime.format('hh:mm a'),
-      location: values.location.label,
+      location: values.location,
       geolocation: geolocation,
-      isPublish: isPublish
+      isPublished: isPublish
     };
 
     axiosInstance
@@ -186,7 +186,7 @@ const CreateEventView = () => {
                     <p className="ant-upload-hint">upload your event banner , it will be your event identifier</p>
                   </Dragger>
                 </Form.Item>
-                <Form.Item label="Event Location" name="location">
+                <Form.Item label="Event Location" name="location" required={false}>
                   <PlaceAutoComplete onSelect={onPlaceSelected} />
                 </Form.Item>
               </Col>
