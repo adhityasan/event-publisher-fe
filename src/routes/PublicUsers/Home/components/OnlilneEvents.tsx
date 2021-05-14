@@ -21,7 +21,7 @@ const OnlilneEvents = () => {
       <Row gutter={[24, 24]} justify="start">
         {onlilneEvents.length > 0 ? (
           onlilneEvents.map((event: any) => (
-            <Col xs={24} sm={12} md={8} key={event._id}>
+            <Col xs={24} sm={12} lg={8} key={event._id}>
               <EventCard
                 id={event._id}
                 bannerUrl={event.bannerUrl}

@@ -1,8 +1,9 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { Table } from 'antd';
+import { Image, Table } from 'antd';
 import { css } from '@emotion/css';
 import { ColumnProps } from 'antd/lib/table';
+import PreviewImageSVG from '../../../../assets/svg/preview_image.svg';
 
 export const TableStyle = css`
   thead th {
@@ -73,12 +74,18 @@ const columns: ColumnProps<any>[] = [
   {
     title: 'Banner',
     dataIndex: 'bannerUrl',
-    key: 'bannerUrl'
-  },
-  {
-    title: 'Creator',
-    dataIndex: 'creator',
-    key: 'creator'
+    key: 'bannerUrl',
+    render: (bannerUrl: string) => (
+      <div style={{ padding: '10px' }}>
+        <Image
+          width={80}
+          src={PreviewImageSVG}
+          preview={{
+            src: bannerUrl
+          }}
+        />
+      </div>
+    )
   }
 ];
 
@@ -88,7 +95,7 @@ interface ITableProps {
 const UpcomingEventsTable: React.FC<ITableProps> = ({ data }) => {
   return (
     <div className={TableStyle}>
-      <Table columns={columns} className="table-striped-rows" dataSource={data} scroll={{ x: 1500, y: 500 }} />
+      <Table columns={columns} className="table-striped-rows" rowKey="_id" dataSource={data} scroll={{ x: 1500, y: 500 }} />
     </div>
   );
 };
