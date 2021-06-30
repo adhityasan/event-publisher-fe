@@ -75,7 +75,7 @@ const ListEventOrganizerView = () => {
                   icon={<ProjectOutlined />}
                   onClick={() => handleSigninEO(item._id)}
                 >
-                  manage
+                  login as event organizer
                 </Button>
               ]}
               extra={<img width={272} alt="logo" src={item.pictureUrl} />}
