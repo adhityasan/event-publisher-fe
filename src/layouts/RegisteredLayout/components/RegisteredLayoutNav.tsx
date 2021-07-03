@@ -73,7 +73,7 @@ const Menus = ({ menuClassName }: { menuClassName?: string }) => {
           SEARCH EVENT
         </div>
       </NavLink>
-      <Dropdown className="user-menu" overlay={<UserMenus socket={socket} />} placement="topRight" trigger={['click']}>
+      <Dropdown className="user-menu" overlay={<UserMenus socket={socket} />} placement="bottomRight" trigger={['click']}>
         <Button className="user-menu-button">
           <UserOutlined className="icon" />
           {appState.user?.email}
