@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { EO_EVENT_UPCOMING_PATH } from '../../../config/urls';
-import UpcomingEventsView from './UpcomingEventsView';
+
+const UpcomingEventsView = loadable(() => import(/* webpackChunkName: "upcomming-events-view" */ './UpcomingEventsView'));
 
 const upcomingEventRoute: IRouteProps = {
   path: EO_EVENT_UPCOMING_PATH,

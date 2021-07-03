@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { ABOUT_PATH } from '../../../config/urls';
-import AboutView from './AboutView';
+
+const AboutView = loadable(() => import(/* webpackChunkName: "about-view" */ './AboutView'));
 
 const AboutRoute: IRouteProps = {
   path: ABOUT_PATH,

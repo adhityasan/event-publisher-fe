@@ -1,38 +1,38 @@
-import React from 'react';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import { primary } from '../../assets/theme/colors';
+import React, { useState } from 'react';
+import PlacesAutocomplete from 'react-places-autocomplete';
+import { Input, AutoComplete } from 'antd';
 
 interface IPlaceAutoComplete {
-  value?: {
-    label: string;
-    value: any;
-  };
-  onSelect: (place: any) => void;
+  onSelect: (place: string) => void;
 }
 
-const PlaceAutoComplete: React.FC<IPlaceAutoComplete> = ({ onSelect, value }) => {
+const PlaceAutoComplete: React.FC<IPlaceAutoComplete> = ({ onSelect }) => {
+  const [value, setValue] = useState<string>('');
+  const handleSelect = (place: string) => {
+    setValue(place);
+    onSelect(place);
+  };
   return (
-    <GooglePlacesAutocomplete
-      selectProps={{
-        value: value,
-        onChange: (option: any) => {
-          onSelect(option);
-        },
-        isClearable: true,
-        styles: {
-          control: (provided: any) => ({
-            ...provided,
-            borderRadius: '0px',
-            boxShadow: 'none',
-            ':hover': {
-              borderColor: primary,
-              boxShadow: '0 0 0 2px rgb(102 93 245 / 20%)'
-            }
-          })
-        },
-        placeholder: 'Search Place'
-      }}
-    />
+    <PlacesAutocomplete value={value} onChange={(val: string) => setValue(val)}>
+      {({ getInputProps, suggestions, loading }) => (
+        <AutoComplete
+          dropdownClassName="certain-category-search-dropdown"
+          dropdownMatchSelectWidth
+          style={{ width: '100%' }}
+          options={suggestions.map((sugg) => ({ label: sugg.description, value: sugg.description }))}
+          onSelect={handleSelect}
+        >
+          <Input.Search
+            style={{ width: '100%' }}
+            loading={loading}
+            {...getInputProps({
+              placeholder: 'Search Places...',
+              className: 'location-search-input'
+            })}
+          />
+        </AutoComplete>
+      )}
+    </PlacesAutocomplete>
   );
 };
 

@@ -1,5 +1,7 @@
+import loadable from '@loadable/component';
 import { INTEREST_PATH } from '../../../config/urls';
-import InterestView from './InterestView';
+
+const InterestView = loadable(() => import(/* webpackChunkName: "interest-view" */ './InterestView'));
 
 const NotFoundRoute: IRouteProps = {
   path: INTEREST_PATH,

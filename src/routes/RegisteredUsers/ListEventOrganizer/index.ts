@@ -1,5 +1,9 @@
+import loadable from '@loadable/component';
 import { LIST_EVENT_ORGANIZER_PATH } from '../../../config/urls';
-import ListEventOrganizerView from './ListEventOrganizerView';
+
+const ListEventOrganizerView = loadable(
+  () => import(/* webpackChunkName: "list-event-organizer-view" */ './ListEventOrganizerView')
+);
 
 const SignOutRoute: IRouteProps = {
   path: LIST_EVENT_ORGANIZER_PATH,

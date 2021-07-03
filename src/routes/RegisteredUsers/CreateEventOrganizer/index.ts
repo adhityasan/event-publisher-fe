@@ -1,5 +1,9 @@
+import loadable from '@loadable/component';
 import { CREATE_EVENT_ORGANIZER_PATH } from '../../../config/urls';
-import CreateEventOrganizerView from './CreateEventOrganizerView';
+
+const CreateEventOrganizerView = loadable(
+  () => import(/* webpackChunkName: "create-event-organizer-view" */ './CreateEventOrganizerView')
+);
 
 const CreateEventOrganizerRoute: IRouteProps = {
   path: CREATE_EVENT_ORGANIZER_PATH,

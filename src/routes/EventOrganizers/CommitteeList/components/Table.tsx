@@ -55,48 +55,34 @@ const onPublish = (eventId: string, eventTitle: string) => {
 
 const columns: ColumnProps<any>[] = [
   {
-    title: 'Title',
+    title: 'Name',
     dataIndex: 'title',
     key: 'title',
     width: 200,
     fixed: 'left'
   },
   {
-    title: 'Subtitle',
+    title: 'Email',
     dataIndex: 'subtitle',
     key: 'subtitle'
   },
   {
-    title: 'Date',
+    title: 'Join Date',
     dataIndex: 'startDate',
     key: 'startDate',
     render: (startDate: number, record: any) =>
       `${dayjs.unix(startDate).format('DD/MM/YYYY')} - ${dayjs.unix(record?.endDate).format('DD/MM/YYYY')}`
   },
   {
-    title: 'Time',
+    title: 'Role',
     dataIndex: 'startTime',
     key: 'startTime',
     render: (startTime: number, record: any) => `${startTime} - ${record?.endTime}`
   },
   {
-    title: 'Location',
+    title: 'Access',
     dataIndex: 'location',
     key: 'location'
-  },
-  {
-    title: 'Banner',
-    dataIndex: 'bannerUrl',
-    key: 'bannerUrl',
-    render: (bannerUrl: string) => (
-      <Image
-        width={80}
-        src={PreviewImageSVG}
-        preview={{
-          src: bannerUrl
-        }}
-      />
-    )
   },
   {
     title: 'Action',
