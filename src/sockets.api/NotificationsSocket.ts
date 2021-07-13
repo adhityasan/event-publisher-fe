@@ -11,3 +11,9 @@ export const unsubsNotification = (socket: SocketIOClient.Socket) => {
   console.log('UNSUBSCRIBE NOTIFICATION');
   socket.off(`${notificationPath} created`);
 };
+
+export const subsEventCategories = (socket: SocketIOClient.Socket, callback: (data: any) => void) => {
+  // eslint-disable-next-line no-console
+  console.log('SUBSCRIBE EVENT CATEGORIES');
+  socket.on('events created', callback);
+};
