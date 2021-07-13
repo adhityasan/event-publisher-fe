@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Spin } from 'antd';
+import QueryString from 'qs';
 import axiosInstance from '../../../../axios.instances';
 import EventCard from '../../../../components/EventCard/EventCard';
 import { EVENTS_API, MASTER_EVENT_FORMATS_API } from '../../../../config/apiUrls';
@@ -10,7 +11,11 @@ const OnlilneEvents = () => {
   useEffect(() => {
     axiosInstance.get(MASTER_EVENT_FORMATS_API, { params: { format: 'online' } }).then(({ data }) => {
       const onlineFormatId: string = data.data[0]._id;
-      axiosInstance.get(EVENTS_API, { params: { eventFormats: onlineFormatId, isPublished: true } }).then(({ data: oE }) => {
+      const params = QueryString.stringify(
+        { eventFormats: onlineFormatId, isPublished: true, $sort: { createdAt: -1 } },
+        { addQueryPrefix: true }
+      );
+      axiosInstance.get(EVENTS_API + params).then(({ data: oE }) => {
         setOnlineEvents(oE.data);
       });
     });
