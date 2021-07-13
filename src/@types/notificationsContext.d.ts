@@ -11,10 +11,10 @@ declare namespace NotificationsContext {
     detailPath?: string;
     message: string;
     from: IFromData;
-    to: string;
-    createdAt: string;
-    updatedAt: string;
-    isOpened: boolean;
+    to?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    isOpened?: boolean;
   }
 
   type IState = INotification[];

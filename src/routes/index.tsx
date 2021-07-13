@@ -19,7 +19,7 @@ import NotFound from './Errors/NotFound';
 import { ERROR_UNAUTHORIZED } from '../config/errorCode';
 import { useSocketContext } from '../context/SocketContext';
 import { emitAuthentication } from '../sockets.api/Authentication';
-import { subsNotification, unsubsNotification } from '../sockets.api/NotificationsSocket';
+import { subsNotification, unsubsNotification, subsEventCategories } from '../sockets.api/NotificationsSocket';
 import { useNotificationsContext } from '../context/NotificationContext';
 
 /**
@@ -59,6 +59,20 @@ const InitRenderRoutes = () => {
           });
           // socket.io client authentication
           emitAuthentication(socket, accessToken).then(() => {
+            subsEventCategories(socket, (data: any) => {
+              setNotification({
+                _id: data._id,
+                message: data.title,
+                from: { _id: data.creator, name: 'Rekomendasi Event', email: '' },
+                isOpened: false
+              });
+              notification.info({
+                message: `Rekomendasi Event: ${data.title}`,
+                placement: 'topRight',
+                top: 74,
+                duration: 8
+              });
+            });
             subsNotification(socket, (data: any) => {
               // set notification data to notificationContext
               setNotification(data);
