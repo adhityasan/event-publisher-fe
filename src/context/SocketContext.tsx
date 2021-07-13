@@ -6,7 +6,12 @@ interface ISocketProviderProps {
   children: ReactNode;
 }
 
-export const socket = socketio.connect(API_URL);
+export const socket = socketio.connect(API_URL, { rejectUnauthorized: false });
+
+socket.on('connect_error', (err: any) => {
+  // eslint-disable-next-line no-console
+  console.log(`SOCKET.IO connect_error due to ${err.message}`);
+});
 
 const SocketContext = createContext<SocketContext.IValue>({
   socket: socket,
