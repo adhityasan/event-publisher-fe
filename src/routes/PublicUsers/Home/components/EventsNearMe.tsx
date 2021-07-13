@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row, Spin } from 'antd';
+import QueryString from 'qs';
 import axiosInstance from '../../../../axios.instances';
 import EventCard from '../../../../components/EventCard/EventCard';
 import { EVENTS_API } from '../../../../config/apiUrls';
@@ -19,11 +20,13 @@ const EventsNearMe = () => {
         }
       }
     };
-    axiosInstance
-      .get(EVENTS_API, { params: { geolocation: nearQuery, geometry: true, parseGeolocation: true, isPublished: true } })
-      .then(({ data }) => {
-        setNearEvents(data);
-      });
+    const nearMeQuery = { geolocation: nearQuery, geometry: true, isPublished: true };
+
+    const params = QueryString.stringify(nearMeQuery, { addQueryPrefix: true });
+
+    axiosInstance.get(EVENTS_API + params).then(({ data }) => {
+      setNearEvents(data);
+    });
   }, [appState.geolocation]);
 
   return (
